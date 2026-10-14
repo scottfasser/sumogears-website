@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<meta name="ext-resource-dependency" content="https://www.sumogearco.com/wp-content/uploads/2024/01/TOY-LC-38-4.1.h.jpg" data-resource-id="kit0">
+<meta name="ext-resource-dependency" content="https://www.sumogearco.com/wp-content/uploads/2024/01/TOY-LC-38-3.3.h.jpg" data-resource-id="kit1">
+<meta name="ext-resource-dependency" content="https://www.sumogearco.com/wp-content/uploads/2024/01/TOY-LC-38-3.1-1.jpg" data-resource-id="kit2">
+<meta name="ext-resource-dependency" content="https://www.sumogearco.com/wp-content/uploads/2024/01/TOY-LC-38-0.909.h.jpg" data-resource-id="kit3">
+<meta name="ext-resource-dependency" content="https://www.sumogearco.com/wp-content/uploads/2024/01/TOY-LC-38-1.1.h.jpg" data-resource-id="kit4">
+<script src="./image-slot.js"></script>
+<script src="./faq-data.js"></script>
+<style>
+* { box-sizing: border-box; }
+body { margin: 0; background: #e4e7ea; }
+a { color: #0686db; text-decoration: none; }
+a:hover { color: #eb0028; }
+html { scroll-behavior: smooth; }
+</style>
+</helmet>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#0686db"/><circle cx="50" cy="50" r="20" fill="none" stroke="#fff" stroke-width="8" stroke-dasharray="6 4"/><circle cx="50" cy="50" r="6" fill="#eb0028"/></svg></template>
+
+<div data-screen-label="Product v2 — LC 60/62/7#" style="max-width:1440px; margin:0 auto; background:#fff; font-family:'Zen Kaku Gothic New', sans-serif; color:#1b2126;">
+
+  <div style="min-height:64px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:14px 28px; padding:10px 40px; background:#fff; border-bottom:3px solid #0686db;">
+    <a href="SumoGears Homepage.dc.html" style="display:flex; align-items:center; gap:12px;">
+      <img src="assets/sumo-logo.svg" alt="Sumo Gears" style="width:52px; height:52px; display:block; object-fit:contain;">
+      <div style="line-height:1;"><div style="font-weight:900; font-size:21px; letter-spacing:0.02em; color:#0f2f57;">SUMO <span style="color:#eb0028;">GEARS</span></div><div style="font-family:'Shippori Mincho'; font-weight:600; font-size:9.5px; letter-spacing:0.26em; color:#0a63a8; margin-top:3px;">日本製 · MADE IN JAPAN</div></div>
+    </a>
+    <div style="display:flex; flex-wrap:wrap; align-items:center; gap:26px; font-weight:500; font-size:14px; color:#3c444c;">
+      <span style="color:#0a63a8; font-weight:700;">Low Range Gear Sets</span><a href="SumoGears Rebuild Kits.dc.html" style="color:#3c444c;">Rebuild Kits</a><span>Community</span><a href="SumoGears Dealer-Event Map v2.html" style="color:#3c444c;">Dealers &amp; Events</a><span>About</span>
+    </div>
+    <div style="display:flex; align-items:center; gap:16px; font-size:13px; color:#5a626a;">
+      <a href="SumoGears FAQ.dc.html" style="color:#5a626a;">FAQs</a><span>Contact</span>
+      <a href="SumoGears Dealer-Event Map v2.html" style="background:#eb0028; color:#fff; font-weight:700; font-size:13.5px; padding:9px 16px; border-radius:2px;">Find a Dealer</a>
+      <span style="background:#0686db; color:#fff; border-radius:2px; padding:7px 11px;">⌕</span>
+    </div>
+  </div>
+
+  <div style="min-height:56px; padding:8px 40px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px; background:#f2f3f4; border-bottom:1px solid #e1e3e5;">
+    <div style="display:flex; flex-wrap:wrap; align-items:center; gap:14px;">
+      <div style="display:flex; gap:1px; background:#d7dbdf; border:1px solid #d7dbdf;">
+        <sc-for list="{{ brands }}" as="b" hint-placeholder-count="2">
+          <div onClick="{{ b.select }}" style="background:{{ b.bg }}; color:{{ b.fg }}; font-weight:900; font-size:15.5px; letter-spacing:0.08em; padding:8px 18px; cursor:pointer;">{{ b.label }}</div>
+        </sc-for>
+      </div>
+      <div style="font-family:'IBM Plex Mono'; font-size:11px; letter-spacing:0.08em; color:#6b7480;">GEAR SETS / {{ brandUpper }} / <span style="color:#0a63a8;">{{ plat.crumb }}</span></div>
+    </div>
+    <div style="display:flex; flex-wrap:wrap; gap:1px; background:#d7dbdf; border:1px solid #d7dbdf;">
+      <sc-for list="{{ series }}" as="s" hint-placeholder-count="4">
+        <div onClick="{{ s.select }}" style="background:{{ s.bg }}; color:{{ s.fg }}; font-weight:700; font-size:15.5px; padding:8px 16px; cursor:{{ s.cursor }};">{{ s.label }}</div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="display:flex; flex-wrap:wrap;">
+    <div style="flex:999 1 760px; min-width:0; padding:24px 40px 40px;">
+      <div style="display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 20px; margin-bottom:22px;">
+        <h1 style="font-weight:900; font-size:36px; line-height:1.08; margin:0; letter-spacing:-0.01em;">{{ plat.title }}</h1>
+        <div style="display:flex; align-items:center; gap:12px;"><div style="width:36px; height:3px; background:#eb0028;"></div><div style="font-family:'Shippori Mincho'; font-weight:800; font-size:16px; letter-spacing:0.05em; color:#0686db;">{{ plat.tagline }}</div></div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap:36px;">
+        <div style="min-width:0;">
+          <div style="position:relative; background:#fff; aspect-ratio:4/3; overflow:hidden;">
+            <sc-if value="{{ frame.isImg }}" hint-placeholder-val="{{ true }}">
+              <img src="{{ frame.src }}" alt="{{ frame.alt }}" onClick="{{ openLb }}" style="width:100%; height:100%; object-fit:contain; display:block; cursor:zoom-in; background:#fff;">
+              <div onClick="{{ openLb }}" style="position:absolute; bottom:12px; right:12px; background:rgba(15,47,87,0.9); color:#fff; font-family:'IBM Plex Mono'; font-size:10.5px; letter-spacing:0.1em; padding:7px 10px; cursor:pointer;">⤢ ENLARGE</div>
+            </sc-if>
+            <sc-if value="{{ frame.isSlot1 }}" hint-placeholder-val="{{ false }}">
+              <image-slot id="lc60-photo-installed" shape="rect" fit="contain" placeholder="Drop clean product photo: installed / in-case"></image-slot>
+            </sc-if>
+            <sc-if value="{{ frame.isSlot2 }}" hint-placeholder-val="{{ false }}">
+              <image-slot id="lc60-photo-detail" shape="rect" fit="contain" placeholder="Drop clean product photo: etching detail"></image-slot>
+            </sc-if>
+            <div style="position:absolute; top:12px; left:12px; background:#0a63a8; color:#fff; font-family:'Shippori Mincho'; font-size:10.5px; letter-spacing:0.18em; padding:6px 11px; pointer-events:none;">MADE IN JAPAN</div>
+            <div onClick="{{ prev }}" style="position:absolute; left:0; top:50%; transform:translateY(-50%); width:40px; height:56px; background:rgba(255,255,255,0.92); border:1px solid #e1e3e5; border-left:0; display:flex; align-items:center; justify-content:center; font-size:20px; color:#0f2f57; cursor:pointer;">‹</div>
+            <div onClick="{{ next }}" style="position:absolute; right:0; top:50%; transform:translateY(-50%); width:40px; height:56px; background:rgba(255,255,255,0.92); border:1px solid #e1e3e5; border-right:0; display:flex; align-items:center; justify-content:center; font-size:20px; color:#0f2f57; cursor:pointer;">›</div>
+          </div>
+          <div style="display:grid; grid-template-columns:repeat(7, minmax(0,1fr)); gap:6px; margin-top:8px;">
+            <sc-for list="{{ thumbs }}" as="t" hint-placeholder-count="7">
+              <div onClick="{{ t.select }}" style="aspect-ratio:1; background:#f2f3f4; border:2px solid {{ t.border }}; overflow:hidden; cursor:pointer; display:flex; align-items:center; justify-content:center;">
+                <sc-if value="{{ t.isImg }}" hint-placeholder-val="{{ true }}"><img src="{{ t.src }}" alt="" style="width:100%; height:100%; object-fit:cover; display:block; background:#fff;"></sc-if>
+                <sc-if value="{{ t.isSlot }}" hint-placeholder-val="{{ false }}"><span style="font-family:'IBM Plex Mono'; font-size:9.5px; color:#6b7480; text-align:center; line-height:1.3;">{{ t.label }}</span></sc-if>
+              </div>
+            </sc-for>
+          </div>
+          <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px; margin-top:10px; font-family:'IBM Plex Mono'; font-size:10.5px; letter-spacing:0.08em; color:#6b7480;"><span>{{ frame.caption }}</span><span>{{ frame.pos }}</span></div>
+        </div>
+
+        <div style="min-width:0;">
+          <div style="font-family:'IBM Plex Mono'; font-size:10.5px; letter-spacing:0.16em; color:#6b7480; margin-bottom:8px;">SELECT KIT</div>
+          <div style="display:grid; grid-auto-flow:column; grid-auto-columns:minmax(0,1fr); gap:1px; background:#d7dbdf; border:1px solid #d7dbdf; margin-bottom:22px;">
+            <sc-for list="{{ kitTabs }}" as="k" hint-placeholder-count="5">
+              <div onClick="{{ k.select }}" style="background:{{ k.bg }}; color:{{ k.fg }}; border-top:3px solid {{ k.bar }}; padding:10px 10px 12px; cursor:pointer;">
+                <div style="font-weight:900; font-size:18px; line-height:1; white-space:nowrap;">{{ k.tab }}</div>
+                <div style="font-family:'IBM Plex Mono'; font-size:9.5px; letter-spacing:0.04em; margin-top:6px; opacity:0.85;">{{ k.short }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="font-family:'IBM Plex Mono'; font-size:10.5px; letter-spacing:0.16em; color:#0a63a8; margin-bottom:6px;">{{ kit.kind }}</div>
+          <h2 style="font-weight:900; font-size:28px; line-height:1.1; margin:0 0 10px;">{{ kit.name }}</h2>
+          <p style="font-size:14.5px; line-height:1.65; color:#5a626a; margin:0 0 18px; text-wrap:pretty;">{{ kit.desc }}</p>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1px; background:#e1e3e5; border:1px solid #e1e3e5; margin-bottom:16px;">
+            <div style="background:#fff; padding:12px 16px;"><div style="font-family:'IBM Plex Mono'; font-size:10px; letter-spacing:0.12em; color:#6b7480;">HIGH RANGE</div><div style="font-weight:900; font-size:26px; color:#0f2f57; margin-top:2px;">{{ kit.hiTxt }}</div></div>
+            <div style="background:#fff; padding:12px 16px;"><div style="font-family:'IBM Plex Mono'; font-size:10px; letter-spacing:0.12em; color:#6b7480;">LOW RANGE</div><div style="font-weight:900; font-size:26px; color:#eb0028; margin-top:2px;">{{ kit.loTxt }}</div></div>
+          </div>
+          <div style="display:flex; flex-direction:column; font-size:13.5px; margin-bottom:20px;">
+            <div style="display:flex; justify-content:space-between; gap:16px; padding:8px 0; border-bottom:1px solid #eceff2;"><span style="color:#6b7480;">Part #</span><span style="font-family:'IBM Plex Mono'; font-weight:600; text-align:right;">{{ kit.part }}</span></div>
+            <sc-for list="{{ kit.specs }}" as="sp" hint-placeholder-count="3">
+              <div style="display:flex; justify-content:space-between; gap:16px; padding:8px 0; border-bottom:1px solid #eceff2;"><span style="color:#6b7480;">{{ sp.l }}</span><span style="font-weight:700; text-align:right;">{{ sp.v }}</span></div>
+            </sc-for>
+          </div>
+          <div style="display:flex; flex-wrap:wrap; gap:10px;">
+            <a href="SumoGears Dealer-Event Map v2.html" style="background:#eb0028; color:#fff; font-weight:700; font-size:14.5px; padding:13px 24px; border-radius:2px;">Find a Dealer</a>
+            <a href="#compare" style="border:2px solid #0a63a8; color:#0a63a8; font-weight:700; font-size:14.5px; padding:11px 22px; border-radius:2px;">{{ compareLabel }}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="flex:1 0 220px; background:#0f2f57; display:grid; grid-template-columns:repeat(auto-fit, minmax(210px,1fr)); grid-auto-rows:minmax(60px,1fr);">
+      <a href="SumoGears Dealer-Event Map v2.html" style="display:flex; align-items:center; justify-content:space-between; padding:0 22px; font-weight:700; font-size:13.5px; letter-spacing:0.14em; color:#fff; border-bottom:1px solid rgba(255,255,255,0.14); background:#eb0028;"><span>FIND A DEALER</span><span style="opacity:0.7;">→</span></a>
+      <a href="SumoGears Product Page v2 - LC 60-70.dc.html" style="display:flex; align-items:center; justify-content:space-between; padding:0 22px; font-weight:700; font-size:13.5px; letter-spacing:0.14em; color:#fff; border-bottom:1px solid rgba(255,255,255,0.14); background:#0686db;"><span>LOW RANGE GEAR SETS</span><span style="opacity:0.7;">→</span></a>
+      <a href="SumoGears Rebuild Kits.dc.html" style="display:flex; align-items:center; justify-content:space-between; padding:0 22px; font-weight:700; font-size:13.5px; letter-spacing:0.14em; color:#d4e6f6; border-bottom:1px solid rgba(255,255,255,0.14);"><span>REBUILD KITS</span><span style="opacity:0.7;">→</span></a>
+      <span style="display:flex; align-items:center; justify-content:space-between; padding:0 22px; font-weight:700; font-size:13.5px; letter-spacing:0.14em; color:#d4e6f6; border-bottom:1px solid rgba(255,255,255,0.14);"><span>STORE - MERCH</span><span style="opacity:0.7;">↗</span></span>
+      <a href="#faq" style="display:flex; align-items:center; justify-content:space-between; padding:0 22px; font-weight:700; font-size:13.5px; letter-spacing:0.14em; color:#d4e6f6; border-bottom:1px solid rgba(255,255,255,0.14);"><span>FAQ</span><span style="opacity:0.7;">→</span></a>
+      <a href="SumoGears Contact.dc.html" style="display:flex; align-items:center; justify-content:space-between; padding:0 22px; font-weight:700; font-size:13.5px; letter-spacing:0.14em; color:#d4e6f6;"><span>CONTACT</span><span style="opacity:0.7;">→</span></a>
+    </div>
+  </div>
+
+  <div id="compare" style="background:#f2f3f4; padding:48px 40px; border-top:1px solid #e1e3e5;">
+    <div style="display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:20px; margin-bottom:22px;">
+      <div>
+        <div style="font-family:'Shippori Mincho'; font-weight:600; font-size:13px; letter-spacing:0.22em; color:#0a63a8; margin-bottom:8px;">比較 · {{ compareEyebrow }}</div>
+        <h2 style="font-weight:900; font-size:30px; margin:0;">Kit comparison</h2>
+      </div>
+      <sc-if value="{{ isToyota }}" hint-placeholder-val="{{ true }}"><div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px;">
+        <span style="font-family:'IBM Plex Mono'; font-size:11px; letter-spacing:0.12em; color:#6b7480;">PICK YOUR RATIO</span>
+        <div style="display:flex; gap:1px; background:#c9ced3; border:1px solid #c9ced3;">
+          <sc-for list="{{ rings }}" as="r" hint-placeholder-count="5">
+            <div onClick="{{ r.select }}" style="background:{{ r.bg }}; color:{{ r.fg }}; font-weight:700; font-size:14px; padding:9px 14px; cursor:pointer;">{{ r.label }}</div>
+          </sc-for>
+        </div>
+      </div></sc-if>
+    </div>
+    <sc-if value="{{ isToyota }}" hint-placeholder-val="{{ true }}"><div style="background:#fff; border:1px solid #e1e3e5; overflow-x:auto;">
+      <div style="min-width:1000px;">
+        <div style="display:grid; grid-template-columns:1.3fr 1.3fr 1.4fr 1.6fr 0.8fr 0.8fr 1fr 1fr; gap:12px; background:#0f2f57; color:#fff; font-family:'IBM Plex Mono'; font-size:10.5px; letter-spacing:0.1em; padding:13px 22px;">
+          <span>KIT</span><span>PART #</span><span>GEARS CHANGED</span><span>BEST FOR</span><span>HIGH</span><span>LOW</span><span>EFFECTIVE HIGH</span><span>EFFECTIVE CRAWL</span>
+        </div>
+        <sc-for list="{{ rows }}" as="row" hint-placeholder-count="5">
+          <div onClick="{{ row.select }}" style="display:grid; grid-template-columns:1.3fr 1.3fr 1.4fr 1.6fr 0.8fr 0.8fr 1fr 1fr; gap:12px; padding:15px 22px; border-bottom:1px solid #eceff2; border-left:4px solid {{ row.bar }}; background:{{ row.bg }}; font-size:14px; align-items:center; cursor:pointer;">
+            <span style="font-weight:900;">{{ row.name }}</span>
+            <span style="font-family:'IBM Plex Mono'; font-size:12px; color:#5a626a;">{{ row.part }}</span>
+            <span style="color:#5a626a;">{{ row.changes }}</span>
+            <span style="color:#1b2126;">{{ row.best }}</span>
+            <span style="color:#5a626a;">{{ row.hiTxt }}</span>
+            <span style="color:#5a626a;">{{ row.loTxt }}</span>
+            <span style="font-weight:700; color:#0a63a8;">{{ row.effHi }}</span>
+            <span style="font-weight:700; color:#eb0028;">{{ row.effLo }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="font-size:12.5px; color:#6b7480; margin-top:12px;">Effective ratio = ring &amp; pinion × transfer case ratio. Click a row to view that kit. Your dealer can help confirm the right kit for your vehicle.</div></sc-if>
+    <sc-if value="{{ isSuzuki }}" hint-placeholder-val="{{ false }}"><div style="background:#fff; border:1px solid #e1e3e5; overflow-x:auto;">
+      <div style="min-width:900px;">
+        <div style="display:grid; grid-template-columns:1.3fr 1.4fr 1fr 0.8fr 0.8fr 1fr 1fr; gap:12px; background:#0f2f57; color:#fff; font-family:'IBM Plex Mono'; font-size:10.5px; letter-spacing:0.1em; padding:13px 22px;">
+          <span>KIT</span><span>PART #</span><span>TIRE SIZE</span><span>HIGH</span><span>LOW</span><span>HIGH REDUCTION</span><span>LOW REDUCTION</span>
+        </div>
+        <sc-for list="{{ rows }}" as="row" hint-placeholder-count="3">
+          <div onClick="{{ row.select }}" style="display:grid; grid-template-columns:1.3fr 1.4fr 1fr 0.8fr 0.8fr 1fr 1fr; gap:12px; padding:15px 22px; border-bottom:1px solid #eceff2; border-left:4px solid {{ row.bar }}; background:{{ row.bg }}; font-size:14px; align-items:center; cursor:pointer;">
+            <span style="font-weight:900;">{{ row.name }}</span>
+            <span style="font-family:'IBM Plex Mono'; font-size:12px; color:#5a626a;">{{ row.part }}</span>
+            <span style="color:#1b2126;">{{ row.best }}</span>
+            <span style="color:#5a626a;">{{ row.hiTxt }}</span>
+            <span style="color:#5a626a;">{{ row.loTxt }}</span>
+            <span style="font-weight:700; color:#0a63a8;">{{ row.hr }}</span>
+            <span style="font-weight:700; color:#eb0028;">{{ row.lr }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="font-size:12.5px; color:#6b7480; margin-top:12px;">Reduction compared with the stock transfer case ratio. Click a row to view that kit. Your dealer can help confirm the right kit for your vehicle.</div></sc-if>
+  </div>
+
+  <div id="faq" style="padding:52px 40px; border-top:1px solid #e1e3e5;">
+    <div style="font-family:'Shippori Mincho'; font-weight:600; font-size:13px; letter-spacing:0.22em; color:#eb0028; margin-bottom:8px;">よくある質問 · FAQ</div>
+    <div style="display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:10px 20px; margin:0 0 28px;"><h2 style="font-weight:900; font-size:30px; margin:0;">{{ plat.short }} questions</h2><a href="SumoGears FAQ.dc.html" style="font-weight:700; font-size:14px;">All FAQs →</a></div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap:40px;">
+      <sc-for list="{{ faqGroups }}" as="g" hint-placeholder-count="2">
+        <div>
+          <div style="display:flex; align-items:center; gap:12px; padding-bottom:12px; border-bottom:3px solid {{ g.color }};">
+            <span style="font-weight:900; font-size:18px;">{{ g.title }}</span>
+            <span style="font-family:'IBM Plex Mono'; font-size:10.5px; letter-spacing:0.1em; color:#6b7480;">{{ g.count }}</span>
+          </div>
+          <sc-for list="{{ g.items }}" as="q" hint-placeholder-count="5">
+            <div style="border-bottom:1px solid #e1e3e5;">
+              <div onClick="{{ q.toggle }}" style="display:flex; justify-content:space-between; align-items:center; gap:16px; padding:16px 0; cursor:pointer; font-weight:700; font-size:15.5px;">
+                <span>{{ q.q }}</span><span style="flex:0 0 26px; height:26px; display:flex; align-items:center; justify-content:center; background:{{ q.iconBg }}; color:{{ q.iconFg }}; font-size:16px; border-radius:2px;">{{ q.icon }}</span>
+              </div>
+              <sc-if value="{{ q.open }}" hint-placeholder-val="{{ false }}">
+                <div style="padding:0 40px 18px 0; font-size:14.5px; line-height:1.7; color:#5a626a; text-wrap:pretty;">{{ q.a }}<sc-if value="{{ q.link }}" hint-placeholder-val="{{ false }}"> <a href="SumoGears Dealer-Event Map v2.html" style="font-weight:700;">Find a dealer →</a></sc-if></div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:1px; background:#e1e3e5; border-top:1px solid #e1e3e5;">
+    <div style="background:#fff; padding:36px 40px; border-top:4px solid #0686db;"><div style="font-weight:900; font-size:28px; color:#0686db;">20+ years</div><div style="font-size:14px; color:#5a626a; line-height:1.6; margin-top:6px;">Custom gearing, shafts and drivetrain parts from All Auto for the most trusted names off-road.</div></div>
+    <div style="background:#fff; padding:36px 40px; border-top:4px solid #0686db;"><div style="font-weight:900; font-size:28px; color:#0686db;">O.E. supplier</div><div style="font-size:14px; color:#5a626a; line-height:1.6; margin-top:6px;">Every part made in Japan by a supplier to Japan's largest automakers.</div></div>
+    <div style="background:#fff; padding:36px 40px; border-top:4px solid #eb0028;"><div style="font-weight:900; font-size:28px; color:#eb0028;">Proven</div><div style="font-size:14px; color:#5a626a; line-height:1.6; margin-top:6px;">Orion and Atlas transfer cases, Marlin Crawler, Allied militaries and Ultra4 champions.</div></div>
+  </div>
+
+  <div style="background:#0f2f57; padding:24px 40px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px; color:#fff;">
+    <div style="font-family:'Shippori Mincho'; font-weight:600; font-size:12px; letter-spacing:0.22em; color:#5eb4ec;">OTHER {{ brandUpper }} PLATFORMS</div>
+    <div style="display:flex; flex-wrap:wrap; gap:28px; font-weight:700; font-size:15px;">
+      <sc-for list="{{ others }}" as="o" hint-placeholder-count="3"><span onClick="{{ o.select }}" style="cursor:pointer;" style-hover="color:#5eb4ec;">{{ o.label }} →</span></sc-for>
+    </div>
+  </div>
+
+  <div style="background:#fff; padding:36px 40px 26px; border-top:3px solid #0686db;">
+    <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:32px; margin-bottom:24px;">
+      <div style="max-width:320px;"><div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;"><img src="assets/sumo-logo.svg" alt="Sumo Gears" style="width:52px; height:52px; display:block; object-fit:contain;"><div style="font-weight:900; font-size:20px; letter-spacing:0.02em; color:#0f2f57;">SUMO <span style="color:#eb0028;">GEARS</span></div></div><div style="font-size:13.5px; color:#8a9097; line-height:1.6;">日本製 · Japan OE-grade drivetrain. An AAIE company.</div></div>
+      <div style="display:flex; flex-wrap:wrap; gap:56px; font-size:13.5px; color:#5a626a;">
+        <div><div style="font-family:'Shippori Mincho'; font-size:11px; color:#0a63a8; letter-spacing:0.14em; margin-bottom:12px;">PRODUCTS</div><div style="display:flex; flex-direction:column; gap:8px;"><span>Toyota Gear Sets</span><span>Suzuki Gear Sets</span><a href="SumoGears Rebuild Kits.dc.html" style="color:#3c444c;">Rebuild Kits</a></div></div>
+        <div><div style="font-family:'Shippori Mincho'; font-size:11px; color:#0a63a8; letter-spacing:0.14em; margin-bottom:12px;">COMPANY</div><div style="display:flex; flex-direction:column; gap:8px;"><span>About Us</span><span>Community</span><span>Events · FAQs</span></div></div>
+        <div><div style="font-family:'Shippori Mincho'; font-size:11px; color:#0a63a8; letter-spacing:0.14em; margin-bottom:12px;">SUPPORT</div><div style="display:flex; flex-direction:column; gap:8px;"><a href="SumoGears Dealer-Event Map v2.html" style="color:#5a626a;">Find a Dealer</a><a href="SumoGears FAQ.dc.html" style="color:#5a626a;">FAQs</a><span>Contact Us</span><span>Store</span></div></div>
+      </div>
+    </div>
+    <div style="border-top:1px solid #e1e3e5; padding-top:16px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px; font-size:11.5px; color:#9aa0a6;"><span>© 2026 Sumo Gears · All Automotive Import Export</span><span style="font-family:'Shippori Mincho'; letter-spacing:0.1em; color:#0a63a8;">Japanese Made. Trail Proven.</span></div>
+  </div>
+
+  <sc-if value="{{ lbOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeLb }}" style="position:fixed; inset:0; z-index:50; background:rgba(10,24,44,0.94); display:flex; align-items:center; justify-content:center; padding:60px 80px;">
+      <img src="{{ lb.src }}" alt="{{ lb.alt }}" style="max-width:100%; max-height:100%; object-fit:contain; background:#fff; display:block;">
+      <div onClick="{{ lbPrev }}" style="position:absolute; left:20px; top:50%; transform:translateY(-50%); width:48px; height:64px; background:#fff; color:#0f2f57; font-size:26px; display:flex; align-items:center; justify-content:center; cursor:pointer;">‹</div>
+      <div onClick="{{ lbNext }}" style="position:absolute; right:20px; top:50%; transform:translateY(-50%); width:48px; height:64px; background:#fff; color:#0f2f57; font-size:26px; display:flex; align-items:center; justify-content:center; cursor:pointer;">›</div>
+      <div style="position:absolute; top:18px; left:24px; right:24px; display:flex; justify-content:space-between; color:#fff; font-family:'IBM Plex Mono'; font-size:12px; letter-spacing:0.1em;"><span>{{ lb.alt }} · {{ lb.pos }}</span><span style="cursor:pointer;">✕ CLOSE</span></div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;defaultKit&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[0,1,2,3,4],&quot;default&quot;:0,&quot;tsType&quot;:&quot;number&quot;}}">
+class Component extends DCLogic {
+  state = { brand: 'toyota', p: 0, k: this.props.defaultKit ?? 0, g: this.props.defaultKit ?? 0, ring: 1, lb: false, lbi: 0, faq: { 'g0': true } };
+  KITS = [
+    { tab: '4.1', short: 'LOWEST LOW', kind: 'LOW RANGE · HIGH RANGE', name: '4.1 Low Range Kit', part: 'TOY-LC-38-4.1', hi: 1.077, lo: 3.981, changes: 'Full set: high & low', best: 'Extreme crawling',
+      img: 'https://www.sumogearco.com/wp-content/uploads/2024/01/TOY-LC-38-4.1.h.jpg',
+      desc: 'Our lowest low range and a must-have for the extreme off-road adventurer. It also drops high range to 1.077:1, turning a 4.11 ring and pinion into an effective 4.43: a real alternative to re-gearing your differentials.' },
+    { tab: '3.3', short: 'INTERMEDIATE', kind: 'LOW RANGE · HIGH RANGE', name: '3.3 Low Range Kit', part: 'TOY-LC-38-3.3', hi: 1.10, lo: 3.297, changes: 'Full set: high & low', best: 'Trail + road balance',
+      img: 'https://www.sumogearco.com/wp-content/uploads/2024/01/TOY-LC-38-3.3.h.jpg',
+      desc: 'An intermediate low range for the serious off-roader, built for trail performance with good on-road manners. The lowered high range also stands in for a differential re-gear.' },
+    { tab: '3.1', short: 'LOW ONLY', kind: 'LOW RANGE ONLY', name: '3.1 Low Range Kit', part: 'TOY-LC-38-3.1', hi: 1.0, lo: 3.091, changes: '2 gears: idler & low', best: 'More crawl, stock highway',
+      img: 'https://www.sumogearco.com/wp-content/uploads/2024/01/TOY-LC-38-3.1-1.jpg',
+      desc: 'Changes only the low range side, so you gain off-road crawl while keeping O.E. on-road performance. Just two gears, an idler and a low gear, which makes it our lowest-cost kit.' },
+    { tab: 'OVER', short: '0.909 HIGH', kind: 'OVERDRIVE', name: 'Overdrive Kit', part: 'TOY-LC-38-0.909', hi: 0.909, lo: 1.904, changes: '2 gears: input & hi-speed', best: 'Lower highway RPM',
+      img: 'https://www.sumogearco.com/wp-content/uploads/2024/01/TOY-LC-38-0.909.h.jpg',
+      desc: 'For trucks that are already re-geared and turn too many RPM at highway speed, or that have gone to smaller tires. High range goes from 1.0:1 to 0.909:1, so a 4.11 behaves like a 3.74 without touching the ring and pinion.' },
+    { tab: 'UNDER', short: '1.100 HIGH', kind: 'UNDERDRIVE', name: 'Underdrive Kit', part: 'TOY-LC-38-1.1', hi: 1.10, lo: 2.449, changes: '2 gears: input & hi-speed', best: 'Bigger tires, more grunt',
+      img: 'https://www.sumogearco.com/wp-content/uploads/2024/01/TOY-LC-38-1.1.h.jpg',
+      desc: 'Restores engine performance after going to bigger tires, or adds pulling power at lower RPM. High range drops from 1.0:1 to 1.10:1, so a 4.11 ring and pinion becomes an effective 4.52.' },
+  ];
+  SUZ = (() => {
+    const U = 'https://www.sumogearco.com/wp-content/uploads/2017/09/';
+    const S = (tab, short, kind, name, part, hi, lo, hr, lr, best, img, desc) => ({ tab, short, kind, name, part, hi, lo, hr, lr, best, img: U + img, desc });
+    const JIM077 = 'Focused purely on off-road performance: low range drops 77% while on-road performance stays O.E. It doesn\u2019t replace either chain-driven gear, so it suits both automatic and manual Jimnys with the electronic transfer case.';
+    return [
+      { id: 'samurai', label: 'Samurai SJ413', title: 'Suzuki Samurai SJ413', short: 'Samurai SJ413', tagline: 'Three ratios. Up to 6.4:1 crawl.', fits: 'Samurai / Jimny', kits: [
+        S('6.4', 'EXTREME', 'LOW RANGE · HIGH RANGE', '6.4 Low Range Kit', 'SUZ-6.4-SP', 1.65, 6.4, '17%', '181%', '32″+', 'SUZ-6.4-SP.h.jpg', 'For the extreme off-road enthusiast. A 17% reduction in high range suits tires up to 32″ and beyond, and a 181% low range reduction handles the most challenging trails.'),
+        S('4.9', 'ADVENTURE', 'LOW RANGE · HIGH RANGE', '4.9 Low Range Kit', 'SUZ-4.9-SP', 1.63, 4.9, '16%', '115%', '30–31″', 'SUZ-4.9-SP.h.jpg', 'Built for the off-road adventurer. A 16% high range reduction suits 30–31″ tires with strong on-road manners, and a 115% low range reduction adds real trail performance.'),
+        S('4.16', 'ENTRY', 'LOW RANGE · HIGH RANGE', '4.16 Low Range Kit', 'SUZ-4.16-SP', 1.58, 4.16, '12%', '83%', '28–30″', 'SUZ-4.16-SP-1-1.jpg', 'Our entry-level kit. A 12% high range reduction is ideal for 28″ tires (up to 30″), with an 83% low range reduction that opens up new trails.'),
+      ] },
+      { id: 'jimny-at', label: 'Jimny · Push Button A/T', title: 'Suzuki Jimny · Push Button T/C', sub: 'Automatic', short: 'Jimny push button A/T', tagline: 'No chain to buy. Three ratio options.', fits: 'Jimny 4AT · push button T/C', kits: [
+        S('15/104', 'EXTREME', 'LOW RANGE · HIGH RANGE', 'JIM-15104 Kit', 'SUZ-JIM-15104-T5', 1.522, 5.407, '15%', '104%', '29–30″', 'SUZ-JIM-15104-T5.h.jpg', 'For the extreme off-road enthusiast: 15% reduction in high range for up to 30″ tires and 104% in low range. The Sumo kit includes the chain-drive change, so there\u2019s no chain to buy.'),
+        S('15/15', 'BALANCED', 'LOW RANGE · HIGH RANGE', 'JIM-1515 Kit', 'SUZ-JIM-1515-T5', 1.522, 3.079, '15%', '15%', '29–30″', 'SUZ-JIM-1515-T5.h.jpg', 'A 15% reduction in both high and low range: a great choice for running up to 30″ tires while improving off-road performance. No separate chain required.'),
+        S('0/77', 'LOW ONLY', 'LOW RANGE ONLY', 'JIM-0077 Kit', 'SUZ-JIM-0077-T5', 1.32, 4.69, '0%', '77%', '28″', 'SUZ-JIM-0077-T5.h.jpg', JIM077),
+      ] },
+      { id: 'jimny-mt', label: 'Jimny · Push Button M/T', title: 'Suzuki Jimny · Push Button T/C', sub: 'Manual', short: 'Jimny push button M/T', tagline: 'No chain to buy. Three ratio options.', fits: 'Jimny 5MT · push button T/C', kits: [
+        S('17/104', 'EXTREME', 'LOW RANGE · HIGH RANGE', 'JIM-JB74-2 Kit', 'SUZ-JIM-JB74-2', 1.17, 4.17, '17%', '104%', '29–31″', 'SUZ-JIM-JB74-2-1.jpg', 'For the extreme off-road enthusiast: 17% reduction in high range for up to 31″ tires and 104% in low range. No separate chain required.'),
+        S('17/17', 'BALANCED', 'LOW RANGE · HIGH RANGE', 'JIM-JB74-1 Kit', 'SUZ-JIM-JB74-1', 1.17, 2.35, '17%', '17%', '29–31″', 'SUZ-JIM-JB74-1.h.jpg', 'A 17% reduction in both high and low range, for running up to 31″ tires while improving off-road performance. No separate chain required.'),
+        S('0/77', 'LOW ONLY', 'LOW RANGE ONLY', 'JIM-0077 Kit', 'SUZ-JIM-0077-T5', 1.0, 3.556, '0%', '77%', '28″', 'SUZ-JIM-0077-T5.h-1.jpg', JIM077),
+      ] },
+      { id: 'jimny-ms', label: 'Jimny · Manual T/C', title: 'Suzuki Jimny · Manually Shifted T/C', short: 'Jimny manual T/C', tagline: 'Built for the planetary low range case.', fits: 'Jimny · manually shifted T/C', kits: [
+        S('15/15', 'BALANCED', 'LOW RANGE · HIGH RANGE', 'JIM-1515 Kit', 'SUZ-JIM-1515-T4', 1.522, 3.079, '15%', '15%', '29–30″', 'SUZ-JIM-1515-T4.h.jpg', 'A 15% reduction in both high and low range for up to 30″ tires. Designed for the manually shifted transfer case with a planetary low range gear set.'),
+      ] },
+      { id: 'vitara', label: 'Vitara / Sidekick', title: 'Suzuki Vitara / Sidekick', short: 'Vitara / Sidekick', tagline: 'More crawl. Stock highway.', fits: 'Sidekick / Vitara / Tracker', kits: [
+        S('4.2', 'LOW ONLY', 'LOW RANGE ONLY', '4.2 Low Range Kit', 'SUZ-4.2', 1.0, 4.24, '0%', '134%', '—', 'SUZ-4.2-1-1.jpg', 'All about the trail: a 134% low range reduction while keeping the O.E. high range ratio for on-road performance.'),
+      ] },
+    ];
+  })();
+  TOY_SERIES = ['4# / 55', '60 / 62 / 7#', '80 / 100', '4Runner / Pickup'];
+  SLOTS = [{ label: 'INSTALLED\nPHOTO', key: 'isSlot1', caption: 'INSTALLED VIEW · PHOTO PENDING' }, { label: 'DETAIL\nPHOTO', key: 'isSlot2', caption: 'ETCHING DETAIL · PHOTO PENDING' }];
+  RINGS = [3.73, 4.11, 4.56, 4.88, 5.29];
+  fmt(n) { return n.toFixed(3).replace(/0+$/, '').replace(/\.$/, '.0') + ':1'; }
+  readHash() {
+    const h = location.hash.slice(1);
+    if (h === 'suzuki') return this.setState({ brand: 'suzuki', p: 0, k: 0, g: 0 });
+    const i = this.SUZ.findIndex(x => x.id === h);
+    if (i >= 0) this.setState({ brand: 'suzuki', p: i, k: 0, g: 0 });
+    else if (h === 'toyota') this.setState({ brand: 'toyota', p: 0, k: 0, g: 0 });
+  }
+  componentDidMount() {
+    this.readHash();
+    this._hash = () => this.readHash();
+    window.addEventListener('hashchange', this._hash);
+    this._key = e => {
+      if (!this.state.lb) return; const n = this._n || 1;
+      if (e.key === 'Escape') this.setState({ lb: false });
+      if (e.key === 'ArrowRight') this.setState(s => ({ lbi: (s.lbi + 1) % n }));
+      if (e.key === 'ArrowLeft') this.setState(s => ({ lbi: (s.lbi + n - 1) % n }));
+    };
+    window.addEventListener('keydown', this._key);
+    if (!window.SUMO_FAQ) this._ft = setInterval(() => { if (window.SUMO_FAQ) { clearInterval(this._ft); this.forceUpdate(); } }, 100);
+  }
+  componentWillUnmount() { window.removeEventListener('keydown', this._key); window.removeEventListener('hashchange', this._hash); clearInterval(this._ft); }
+  renderVals() {
+    const { brand, p, ring, lb } = this.state;
+    const isT = brand === 'toyota';
+    const R = window.__resources || {};
+    const rp = this.RINGS[ring];
+    const pl = isT ? { title: 'Toyota Land Cruiser 60 / 62 / 7#', short: 'Land Cruiser 60 / 62 / 7#', tagline: 'Five ratios. One split-style case.', fits: '34mm & 38mm split style' } : this.SUZ[p];
+    const src = isT ? this.KITS : pl.kits;
+    const k = Math.min(this.state.k, src.length - 1);
+    const kits = src.map((x, i) => {
+      const specs = isT
+        ? [{ l: 'Transfer case', v: pl.fits }, { l: 'Gears changed', v: x.changes }, { l: 'Material · Origin', v: 'SCM420H · Made in Japan' }]
+        : [{ l: 'Fits', v: pl.fits }, { l: 'Recommended tires', v: x.best }, { l: 'Reduction (high / low)', v: x.hr + ' / ' + x.lr }, { l: 'Material · Origin', v: 'SCM420H · Made in Japan' }];
+      return { ...x, img: (isT && R['kit' + i]) || x.img, hiTxt: this.fmt(x.hi), loTxt: this.fmt(x.lo), specs, select: () => this.setState({ k: i, g: i }) };
+    });
+    this._n = kits.length;
+    const slots = isT ? this.SLOTS : [];
+    const N = kits.length + slots.length;
+    const g = Math.min(this.state.g, N - 1);
+    const lbi = Math.min(this.state.lbi, kits.length - 1);
+    const frameOf = i => i < kits.length
+      ? { isImg: true, isSlot1: false, isSlot2: false, src: kits[i].img, alt: kits[i].name, caption: kits[i].part + ' · ' + kits[i].name.toUpperCase() }
+      : { isImg: false, isSlot1: slots[i - kits.length].key === 'isSlot1', isSlot2: slots[i - kits.length].key === 'isSlot2', caption: slots[i - kits.length].caption };
+    const go = d => this.setState(s => { const ng = (Math.min(s.g, N - 1) + d + N) % N; return { g: ng, k: ng < kits.length ? ng : s.k }; });
+    const stop = fn => e => { e.stopPropagation(); fn(); };
+    const setPlat = i => () => { this.setState({ p: i, k: 0, g: 0 }); history.replaceState(null, '', '#' + this.SUZ[i].id); };
+    const faqIds = isT ? ['lc60', 'toyota'] : ['general', 'suzuki'];
+    return {
+      isToyota: isT, isSuzuki: !isT,
+      brands: [['toyota', 'TOYOTA'], ['suzuki', 'SUZUKI']].map(([b, l]) => ({ label: l, bg: b === brand ? '#0f2f57' : '#fff', fg: b === brand ? '#fff' : '#3c444c',
+        select: () => { this.setState({ brand: b, p: 0, k: 0, g: 0 }); history.replaceState(null, '', '#' + b); } })),
+      brandUpper: isT ? 'TOYOTA' : 'SUZUKI',
+      plat: { ...pl, title: pl.title + (pl.sub ? ' · ' + pl.sub : ''), crumb: pl.short.toUpperCase() },
+      series: isT
+        ? this.TOY_SERIES.map((l, i) => ({ label: l, bg: i === 1 ? '#0686db' : '#fff', fg: i === 1 ? '#fff' : '#3c444c', cursor: 'default', select: () => {} }))
+        : this.SUZ.map((x, i) => ({ label: x.label, bg: i === p ? '#0686db' : '#fff', fg: i === p ? '#fff' : '#3c444c', cursor: 'pointer', select: setPlat(i) })),
+      others: isT
+        ? ['Land Cruiser 4# / 55', 'Land Cruiser 80 / 100 / 105', '4Runner / Pickup'].map(l => ({ label: l, select: () => {} }))
+        : this.SUZ.map((x, i) => ({ label: x.short, i, select: setPlat(i) })).filter(o => o.i !== p),
+      compareLabel: kits.length > 1 ? `Compare all ${kits.length} kits` : 'View kit details',
+      compareEyebrow: kits.length > 1 ? `COMPARE ALL ${['', 'ONE', 'TWO', 'THREE', 'FOUR', 'FIVE'][kits.length] || kits.length}` : 'KIT DETAILS',
+      kit: kits[k],
+      frame: { ...frameOf(g), pos: `${g + 1} / ${N}` },
+      prev: () => go(-1), next: () => go(1),
+      thumbs: [...kits.map(x => ({ isImg: true, isSlot: false, src: x.img })), ...slots.map(s => ({ isImg: false, isSlot: true, label: s.label }))]
+        .map((t, i) => ({ ...t, border: i === g ? '#0686db' : 'transparent', select: () => this.setState(s => ({ g: i, k: i < kits.length ? i : s.k })) })),
+      openLb: () => this.setState({ lb: true, lbi: g < kits.length ? g : 0 }),
+      closeLb: () => this.setState({ lb: false }),
+      lbOpen: lb,
+      lb: { src: kits[lbi].img, alt: kits[lbi].name, pos: `${lbi + 1} / ${kits.length}` },
+      lbPrev: stop(() => this.setState(s => ({ lbi: (s.lbi + kits.length - 1) % kits.length }))),
+      lbNext: stop(() => this.setState(s => ({ lbi: (s.lbi + 1) % kits.length }))),
+      kitTabs: kits.map((x, i) => ({ ...x, bg: i === k ? '#0f2f57' : '#fff', fg: i === k ? '#fff' : '#1b2126', bar: i === k ? '#eb0028' : 'transparent' })),
+      rings: this.RINGS.map((r, i) => ({ label: r.toFixed(2), select: () => this.setState({ ring: i }), bg: i === ring ? '#0686db' : '#fff', fg: i === ring ? '#fff' : '#1b2126' })),
+      rows: kits.map((x, i) => ({ ...x, effHi: (rp * x.hi).toFixed(2), effLo: (rp * x.lo).toFixed(2), bg: i === k ? '#eef6fd' : '#fff', bar: i === k ? '#0686db' : 'transparent' })),
+      faqGroups: faqIds.map(id => (window.SUMO_FAQ || []).find(g => g.id === id)).filter(Boolean).map((grp, gi) => ({ ...grp, count: `${grp.items.length} QUESTIONS`, items: grp.items.map((q, qi) => {
+        const id = brand + gi + '-' + qi; const open = !!this.state.faq[id] || (gi === 0 && qi === 0 && this.state.faq[id] !== false);
+        return { ...q, link: !!q.link, open, icon: open ? '−' : '+', iconBg: open ? '#0f2f57' : '#eef1f4', iconFg: open ? '#fff' : '#0f2f57',
+          toggle: () => this.setState(s => ({ faq: { ...s.faq, [id]: !open } })) };
+      }) })),
+    };
+  }
+}
+</script>
+</body>
+</html>

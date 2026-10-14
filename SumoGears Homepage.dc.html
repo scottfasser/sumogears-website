@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; }
+body { margin: 0; background: #e4e7ea; }
+a { color: #0686db; text-decoration: none; }
+a:hover { color: #eb0028; }
+</style>
+</helmet>
+<template id="__bundler_thumbnail" data-bg-color="#0f2f57"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#0f2f57"/><rect x="22" y="40" width="56" height="12" fill="#0686db"/><rect x="22" y="58" width="28" height="6" fill="#eb0028"/></svg></template>
+
+  <div data-screen-label="Homepage" style="max-width:1440px; margin:0 auto; background:#eef1f4; overflow:hidden; font-family:'Zen Kaku Gothic New', sans-serif; color:#1b2126;">
+
+    <div style="background:#0f2f57; height:34px; display:flex; align-items:center; justify-content:space-between; padding:0 40px; font-family:'IBM Plex Mono'; font-size:11px; letter-spacing:0.08em; color:#9dc2e4;">
+      <span></span>
+      <div style="display:flex; gap:20px;"><a href="SumoGears Dealer-Event Map v2.html" style="color:#9dc2e4;">EVENTS</a><a href="SumoGears FAQ.dc.html" style="color:#9dc2e4;">FAQs</a><span style="color:#fff;">DEALER LOGIN</span></div>
+    </div>
+
+    <div style="height:86px; display:flex; align-items:center; justify-content:space-between; padding:0 40px; background:#fff; border-bottom:1px solid #dfe4e9;">
+      <div style="display:flex; align-items:center; gap:14px;"><img src="assets/sumo-logo.svg" alt="Sumo Gears" style="width:60px; height:60px; display:block; object-fit:contain;"><div style="line-height:1;"><div style="font-family:'Zen Kaku Gothic New'; font-weight:900; font-size:25px; letter-spacing:0.02em; color:#0f2f57;">SUMO <span style="color:#eb0028;">GEARS</span></div><div style="font-family:'Shippori Mincho'; font-weight:600; font-size:10.5px; letter-spacing:0.26em; color:#0a63a8; margin-top:4px;">日本製 · MADE IN JAPAN</div></div></div>
+      <div style="display:flex; align-items:center; gap:26px; font-weight:500; font-size:14.5px; color:#3c444c;">
+        <a href="SumoGears Product Page v2 - LC 60-70.dc.html" style="color:#0a63a8; font-weight:700;">Gear Sets</a><a href="SumoGears Rebuild Kits.dc.html" style="color:#3c444c;">Rebuild Kits</a><span>Community</span><a href="SumoGears Dealer-Event Map v2.html" style="color:#3c444c;">Dealers</a><span>About</span>
+        <a href="SumoGears Dealer-Event Map v2.html" style="background:#eb0028; color:#fff; font-weight:700; font-size:13.5px; padding:11px 20px; border-radius:2px;">Find a Dealer</a>
+      </div>
+    </div>
+
+    <!-- fitment selector bar — the primary action -->
+    <div style="background:#0686db; padding:20px 40px; display:flex; align-items:center; gap:14px;">
+      <div style="color:#fff; font-weight:900; font-size:17px; white-space:nowrap; margin-right:6px;">Find your exact fit</div>
+      <div style="flex:1; background:#fff; border-radius:2px; padding:12px 16px; font-size:14px; color:#5a626a; display:flex; justify-content:space-between;"><span>Make — Toyota</span><span style="color:#0686db;">▾</span></div>
+      <div style="flex:1; background:#fff; border-radius:2px; padding:12px 16px; font-size:14px; color:#5a626a; display:flex; justify-content:space-between;"><span>Model</span><span style="color:#0686db;">▾</span></div>
+      <div style="flex:1; background:#fff; border-radius:2px; padding:12px 16px; font-size:14px; color:#5a626a; display:flex; justify-content:space-between;"><span>Year</span><span style="color:#0686db;">▾</span></div>
+      <div style="flex:1; background:#fff; border-radius:2px; padding:12px 16px; font-size:14px; color:#5a626a; display:flex; justify-content:space-between;"><span>Transfer case</span><span style="color:#0686db;">▾</span></div>
+      <a href="SumoGears Product Page v2 - LC 60-70.dc.html" style="background:#0f2f57; color:#fff; font-weight:700; font-size:14.5px; padding:13px 28px; border-radius:2px; white-space:nowrap;">Search →</a>
+    </div>
+
+    <!-- hero: image left, big button panel right -->
+    <div style="display:flex; background:#fff; border-bottom:1px solid #dfe4e9;">
+      <div style="flex:1; position:relative; min-height:480px; overflow:hidden; background:#0f2f57; display:flex; flex-direction:column; justify-content:center; padding:48px;">
+        <img src="assets/hero-jimny-creek-r.jpg" alt="Suzuki Jimny splashing through a muddy creek crossing" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:100% 45%;">
+        <img src="assets/hero-lc76-desert.jpg" alt="Toyota Land Cruiser 76 climbing a dusty desert trail" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:100% 50%; opacity:{{ op0 }}; transition:opacity 0.9s ease;">
+        <div style="position:absolute; inset:0; background:linear-gradient(90deg, rgba(15,47,87,0.94) 0%, rgba(15,47,87,0.78) 36%, rgba(15,47,87,0.2) 56%, rgba(15,47,87,0) 72%); pointer-events:none;"></div>
+        <div style="position:absolute; right:20px; bottom:18px; z-index:2; display:flex; align-items:center; gap:10px;">
+          <div onClick="{{ prev }}" style="width:36px; height:36px; background:rgba(255,255,255,0.92); color:#0f2f57; display:flex; align-items:center; justify-content:center; font-size:18px; cursor:pointer;">‹</div>
+          <sc-for list="{{ dots }}" as="d" hint-placeholder-count="2"><div onClick="{{ d.go }}" style="width:{{ d.w }}; height:4px; background:{{ d.bg }}; cursor:pointer; transition:width 0.3s;"></div></sc-for>
+          <div onClick="{{ next }}" style="width:36px; height:36px; background:rgba(255,255,255,0.92); color:#0f2f57; display:flex; align-items:center; justify-content:center; font-size:18px; cursor:pointer;">›</div>
+        </div>
+        <div style="position:relative; z-index:1; display:flex; flex-direction:column;">
+        <div style="font-family:'Shippori Mincho'; font-weight:600; font-size:13px; letter-spacing:0.28em; color:#7fc4f2; margin-bottom:16px;">日本製 — MADE IN JAPAN</div>
+        <h1 style="font-weight:900; font-size:40px; line-height:1.08; margin:0 0 16px; color:#fff; max-width:460px;">Japanese Made Gears and Accessories for Toyota &amp; Suzuki</h1>
+        <div style="display:inline-flex; align-self:flex-start; align-items:center; gap:12px; background:#eb0028; color:#fff; font-family:'Shippori Mincho'; font-weight:800; font-size:19px; letter-spacing:0.06em; padding:9px 18px; margin-bottom:18px;">Japanese Made. Trail Proven.</div>
+        <p style="font-size:15.5px; line-height:1.65; color:#dbe6f1; max-width:430px; margin:0;">Low range gear sets and rebuild kits from the same Japanese OE supply chain that builds for Toyota and Suzuki — in stock, exact-fit, etched and traceable.</p>
+        </div>
+      </div>
+      <div style="width:340px; background:#f6f8fa; border-left:1px solid #dfe4e9; display:flex; flex-direction:column;">
+        <div style="padding:16px 22px; font-family:'IBM Plex Mono'; font-size:10.5px; letter-spacing:0.16em; color:#0a63a8; border-bottom:1px solid #dfe4e9; background:#fff;">SHOP &amp; SUPPORT</div>
+        <a href="SumoGears Product Page v2 - LC 60-70.dc.html" style="flex:1; padding:20px 22px; border-bottom:1px solid #dfe4e9; display:flex; align-items:center; justify-content:space-between; text-decoration:none; color:#fff; background:#0a63a8;"><div><div style="font-weight:900; font-size:20px; line-height:1.05;">Toyota Gear Sets</div><div style="font-size:12px; color:#ffffff;">Land Cruiser · Tacoma · Hilux · 4Runner</div></div><span style="font-size:20px;">→</span></a>
+        <a href="SumoGears Product Page v2 - LC 60-70.dc.html#suzuki" style="flex:1; padding:20px 22px; border-bottom:1px solid #dfe4e9; display:flex; align-items:center; justify-content:space-between; text-decoration:none; color:#1b2126;"><div><div style="font-weight:900; font-size:20px; line-height:1.05;">Suzuki Gear Sets</div><div style="font-size:12px; color:#5a626a;">Jimny · Samurai</div></div><span style="font-size:20px; color:#0686db;">→</span></a>
+        <a href="SumoGears Rebuild Kits.dc.html#toyota" style="flex:1; padding:20px 22px; border-bottom:1px solid #dfe4e9; display:flex; align-items:center; justify-content:space-between; text-decoration:none; color:#1b2126;"><div><div style="font-weight:900; font-size:20px; line-height:1.05;">Rebuild Kits</div><div style="font-size:12px; color:#5a626a;">Bearings · seals · shims</div></div><span style="font-size:20px; color:#0686db;">→</span></a>
+        <a href="SumoGears Dealer-Event Map v2.html" style="flex:1; padding:20px 22px; border-bottom:1px solid #dfe4e9; display:flex; align-items:center; justify-content:space-between; text-decoration:none; color:#1b2126;"><div><div style="font-weight:900; font-size:20px; line-height:1.05;">Find a Dealer</div><div style="font-size:12px; color:#5a626a;">60+ distributors across the world</div></div><span style="font-size:20px; color:#0686db;">→</span></a>
+        <a style="flex:1; padding:20px 22px; display:flex; align-items:center; justify-content:space-between; text-decoration:none; color:#fff; background:#eb0028;"><div><div style="font-weight:900; font-size:20px; line-height:1.05;">Share Your Build</div><div style="font-size:12px; opacity:0.9;">Get featured on the site</div></div><span style="font-size:20px;">→</span></a>
+      </div>
+    </div>
+
+    <!-- proof strip -->
+    <div style="background:#0f2f57; padding:18px 40px; display:flex; align-items:center; justify-content:space-between; color:#fff;">
+      <a href="SumoGears FAQ.dc.html#proven" style="font-family:'IBM Plex Mono'; font-size:11px; letter-spacing:0.16em; color:#9dc2e4;">PROVEN IN</a>
+      <a href="SumoGears FAQ.dc.html#dagor" style="font-weight:700; font-size:14.5px; color:#fff;">Military — Polaris DAGOR</a>
+      <span style="color:#3f6796;">|</span>
+      <a href="SumoGears FAQ.dc.html#aviation" style="font-weight:700; font-size:14.5px; color:#fff;">Aviation — Pine Mountain</a>
+      <span style="color:#3f6796;">|</span>
+      <a href="SumoGears FAQ.dc.html#oe" style="font-weight:700; font-size:14.5px; color:#fff;">Toyota &amp; Suzuki OE Supply Chain</a>
+      <span style="color:#3f6796;">|</span>
+      <a href="SumoGears FAQ.dc.html#advance-adapters" style="font-weight:700; font-size:14.5px; color:#fff;">Advance Adapters</a>
+      <span style="color:#3f6796;">|</span>
+      <a href="SumoGears FAQ.dc.html#marlin" style="font-weight:700; font-size:14.5px; color:#fff;">Marlin Crawler</a>
+      <span style="color:#3f6796;">|</span>
+      <a href="SumoGears FAQ.dc.html#koth" style="font-weight:700; font-size:14.5px; color:#fff;">King of the Hammers</a>
+    </div>
+
+    <!-- ratio comparison table -->
+    <div style="padding:44px 40px; background:#eef1f4;">
+      <div style="display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:20px;">
+        <div><div style="font-family:'Shippori Mincho'; font-weight:600; font-size:12.5px; letter-spacing:0.2em; color:#0a63a8; margin-bottom:8px;">SPEC COMPARISON</div><h2 style="font-weight:900; font-size:32px; margin:0;">Pick your crawl ratio</h2></div>
+        <span style="font-weight:700; font-size:14.5px; color:#eb0028;">Full fitment guide →</span>
+      </div>
+      <div style="background:#fff; border:1px solid #dfe4e9;">
+        <div style="display:grid; grid-template-columns:1.6fr 1fr 1fr 1fr 1fr 0.9fr; background:#0f2f57; color:#fff; font-family:'IBM Plex Mono'; font-size:11px; letter-spacing:0.1em; padding:14px 20px;">
+          <span>GEAR SET</span><span>RATIO</span><span>PLATFORM</span><span>SPLINE</span><span>MATERIAL</span><span style="text-align:right;">PRICE</span>
+        </div>
+        <div style="display:grid; grid-template-columns:1.6fr 1fr 1fr 1fr 1fr 0.9fr; padding:16px 20px; border-bottom:1px solid #eceff2; font-size:14px; align-items:center;">
+          <span style="font-weight:700;">Sumo Low Range 4.70</span><span style="color:#0a63a8; font-weight:700;">4.70:1</span><span style="color:#5a626a;">Toyota RF1A</span><span style="color:#5a626a;">23T</span><span style="color:#5a626a;">SCM420H</span><span style="text-align:right; font-weight:700;">$489</span>
+        </div>
+        <div style="display:grid; grid-template-columns:1.6fr 1fr 1fr 1fr 1fr 0.9fr; padding:16px 20px; border-bottom:1px solid #eceff2; font-size:14px; align-items:center; background:#f7fafc;">
+          <span style="font-weight:700;">Sumo Low Range 4.70 <span style="background:#eb0028; color:#fff; font-size:10px; padding:3px 7px; margin-left:6px; border-radius:2px;">BEST SELLER</span></span><span style="color:#0a63a8; font-weight:700;">4.70:1</span><span style="color:#5a626a;">Tacoma · 4Runner</span><span style="color:#5a626a;">21T</span><span style="color:#5a626a;">SCM420H</span><span style="text-align:right; font-weight:700;">$449</span>
+        </div>
+        <div style="display:grid; grid-template-columns:1.6fr 1fr 1fr 1fr 1fr 0.9fr; padding:16px 20px; font-size:14px; align-items:center;">
+          <span style="font-weight:700;">Sumo Crawl 6.50</span><span style="color:#0a63a8; font-weight:700;">6.50:1</span><span style="color:#5a626a;">Suzuki Jimny</span><span style="color:#5a626a;">—</span><span style="color:#5a626a;">SCM420H</span><span style="text-align:right; font-weight:700;">$399</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- rebuild kits table -->
+    <div style="padding:0 40px 44px; background:#eef1f4;">
+      <div style="display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:20px;">
+        <div><div style="font-family:'Shippori Mincho'; font-weight:600; font-size:12.5px; letter-spacing:0.2em; color:#eb0028; margin-bottom:8px;">REBUILD KITS</div><h2 style="font-weight:900; font-size:32px; margin:0;">Refresh your ride</h2></div>
+        <span style="font-weight:700; font-size:14.5px; color:#eb0028;"><a href="SumoGears Rebuild Kits.dc.html" style="color:#eb0028;">All rebuild kits →</a></span>
+      </div>
+      <div style="background:#fff; border:1px solid #dfe4e9;">
+        <div style="display:grid; grid-template-columns:1.6fr 1fr 1fr 1.4fr 0.9fr; background:#eb0028; color:#fff; font-family:'IBM Plex Mono'; font-size:11px; letter-spacing:0.1em; padding:14px 20px;">
+          <span>REBUILD KIT</span><span>MAKE</span><span>PLATFORM</span><span>INCLUDES</span><span style="text-align:right;">PRICE</span>
+        </div>
+        <div style="display:grid; grid-template-columns:1.6fr 1fr 1fr 1.4fr 0.9fr; padding:16px 20px; border-bottom:1px solid #eceff2; font-size:14px; align-items:center;">
+          <span style="font-weight:700;">Front Axle Premium Rebuild Kit <span style="background:#eb0028; color:#fff; font-size:10px; padding:3px 7px; margin-left:6px; border-radius:2px;">BEST SELLER</span></span><span style="color:#5a626a;">Toyota</span><span style="color:#5a626a;">Land Cruiser FJ80</span><span style="color:#5a626a;">OE bearings · seals · gaskets</span><span style="text-align:right; font-weight:700;">$289</span>
+        </div>
+        <div style="display:grid; grid-template-columns:1.6fr 1fr 1fr 1.4fr 0.9fr; padding:16px 20px; font-size:14px; align-items:center; background:#f7fafc;">
+          <span style="font-weight:700;">Transfer Case Rebuild Kit <span style="background:#eb0028; color:#fff; font-size:10px; padding:3px 7px; margin-left:6px; border-radius:2px;">BEST SELLER</span></span><span style="color:#5a626a;">Suzuki</span><span style="color:#5a626a;">Jimny</span><span style="color:#5a626a;">OE bearings · seals · gaskets</span><span style="text-align:right; font-weight:700;">$189</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- two-up: why + build feed -->
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; padding:0 40px 44px; background:#eef1f4;">
+      <div style="background:#fff; border:1px solid #dfe4e9; padding:32px; border-top:4px solid #0686db;">
+        <h3 style="font-weight:900; font-size:24px; margin:0 0 16px;">Why Japan OE-sourced matters</h3>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:22px;">
+          <div><div style="font-weight:900; font-size:28px; color:#0686db;">±0.01mm</div><div style="font-size:13px; color:#5a626a;">Tolerance held on every cut gear</div></div>
+          <div><div style="font-weight:900; font-size:28px; color:#0686db;">SCM420H</div><div style="font-size:13px; color:#5a626a;">Carburized Japanese alloy steel</div></div>
+          <div><div style="font-weight:900; font-size:28px; color:#0686db;">100%</div><div style="font-size:13px; color:#5a626a;">Sourced from OE suppliers in Japan</div></div>
+          <div><div style="font-weight:900; font-size:28px; color:#eb0028;">Etched</div><div style="font-size:13px; color:#5a626a;">“SUMO GEAR · MADE IN JAPAN”</div></div>
+        </div>
+      </div>
+      <div style="background:#fff; border:1px solid #dfe4e9; padding:32px; border-top:4px solid #eb0028;">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;"><h3 style="font-weight:900; font-size:24px; margin:0;">From the community</h3><span style="font-weight:700; font-size:13.5px; color:#eb0028;">Share your build →</span></div>
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin-bottom:16px; align-items:start;">
+          <a href="https://www.youtube.com/watch?v=7xCwDz0PiNI" target="_blank" rel="noopener" style="display:flex; flex-direction:column; gap:6px; color:#1b2126;">
+            <div style="position:relative; height:110px; overflow:hidden; background:#0f2f57;">
+              <img src="assets/community-fj80-front-axle.jpg" alt="Sumo Gear Premium Rebuild Kit held under a Land Cruiser FJ80 front axle" style="width:100%; height:100%; object-fit:cover; display:block;">
+              <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(15,47,87,0.18);">
+                <div style="width:44px; height:44px; border-radius:50%; background:rgba(235,0,40,0.92); display:flex; align-items:center; justify-content:center; box-shadow:0 2px 10px rgba(0,0,0,0.35);"><div style="width:0; height:0; border-top:8px solid transparent; border-bottom:8px solid transparent; border-left:13px solid #fff; margin-left:4px;"></div></div>
+              </div>
+            </div>
+            <div style="font-size:12px; font-weight:700; line-height:1.35; text-wrap:pretty;">Front Axle Rebuild. 1991 Toyota Land Cruiser FJ80</div>
+          </a>
+          <a href="https://www.youtube.com/watch?v=F_vHyLsT6_E" target="_blank" rel="noopener" style="display:flex; flex-direction:column; gap:6px; color:#1b2126;">
+            <div style="position:relative; height:110px; overflow:hidden; background:#0f2f57;">
+              <img src="assets/community-fox-bravo-overland.png" alt="Fox Bravo Overland team standing beside their overland rig in the desert" style="width:100%; height:100%; object-fit:cover; display:block;">
+              <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(15,47,87,0.18);">
+                <div style="width:44px; height:44px; border-radius:50%; background:rgba(235,0,40,0.92); display:flex; align-items:center; justify-content:center; box-shadow:0 2px 10px rgba(0,0,0,0.35);"><div style="width:0; height:0; border-top:8px solid transparent; border-bottom:8px solid transparent; border-left:13px solid #fff; margin-left:4px;"></div></div>
+              </div>
+            </div>
+            <div style="font-size:12px; font-weight:700; line-height:1.35; text-wrap:pretty;">Fox Bravo Overland (FBO) - A community of veterans, first responders and service members.</div>
+          </a>
+          <div style="height:110px; background:repeating-linear-gradient(45deg,#dfe5eb,#dfe5eb 10px,#e8edf1 10px,#e8edf1 20px); display:flex; align-items:flex-end; padding:8px;"><span style="font-size:9px; color:#96a0aa;">EVENT</span></div>
+        </div>
+        <div style="border-left:3px solid #0686db; padding-left:14px;"><div style="font-size:14px; color:#3c444c; line-height:1.6;">“Zero backlash after 18 months of hard wheeling. These are OE, full stop.”</div><div style="font-family:'IBM Plex Mono'; font-size:10.5px; color:#8a9097; margin-top:8px;">VERIFIED BUILD · FZJ80</div></div>
+      </div>
+    </div>
+
+    <div style="background:#fff; padding:42px 40px 30px; border-top:3px solid #0686db;">
+      <div style="display:flex; justify-content:space-between; margin-bottom:28px;">
+        <div style="max-width:320px;"><div style="margin-bottom:14px;"><div style="display:flex; align-items:center; gap:14px;"><img src="assets/sumo-logo.svg" alt="Sumo Gears" style="width:46px; height:46px; display:block; object-fit:contain;"><div style="line-height:1;"><div style="font-family:'Zen Kaku Gothic New'; font-weight:900; font-size:21px; letter-spacing:0.02em; color:#0f2f57;">SUMO <span style="color:#eb0028;">GEARS</span></div></div></div></div><div style="font-size:13.5px; color:#8a9097; line-height:1.6;">Japan OE low range gear sets &amp; rebuild kits. Exclusively distributed by All Auto Import Export.</div></div>
+        <div style="display:flex; gap:56px; font-size:13.5px; color:#5a626a;">
+          <div><div style="font-family:'Shippori Mincho'; font-size:11px; color:#0a63a8; letter-spacing:0.14em; margin-bottom:12px;">SHOP</div><div style="display:flex; flex-direction:column; gap:8px;"><span>Toyota Gear Sets</span><span>Suzuki Gear Sets</span><a href="SumoGears Rebuild Kits.dc.html" style="color:#3c444c;">Rebuild Kits</a></div></div>
+          <div><div style="font-family:'Shippori Mincho'; font-size:11px; color:#0a63a8; letter-spacing:0.14em; margin-bottom:12px;">COMPANY</div><div style="display:flex; flex-direction:column; gap:8px;"><span>About Us</span><span>Community</span><a href="SumoGears FAQ.dc.html" style="color:#5a626a;">FAQs</a></div></div>
+          <div><div style="font-family:'Shippori Mincho'; font-size:11px; color:#0a63a8; letter-spacing:0.14em; margin-bottom:12px;">SUPPORT</div><div style="display:flex; flex-direction:column; gap:8px;"><span>Find a Dealer</span><span>Become a Dealer</span><span>Contact Us</span></div></div>
+        </div>
+      </div>
+      <div style="border-top:1px solid #e1e3e5; padding-top:18px; display:flex; justify-content:space-between; font-size:11.5px; color:#9aa0a6;"><span>© 2026 Sumo Gears · All Automotive Import Export</span><span style="font-family:'Shippori Mincho'; letter-spacing:0.1em; color:#0a63a8;">Japanese Made. Trail Proven.</span></div>
+    </div>
+
+  </div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { s: 0 };
+  N = 2;
+  componentDidMount() { this.t = setInterval(() => { if (this.props.autoplay ?? true) this.setState(st => ({ s: (st.s + 1) % this.N })); }, 7000); }
+  componentWillUnmount() { clearInterval(this.t); }
+  go(i) { clearInterval(this.t); this.setState({ s: (i + this.N) % this.N }); }
+  renderVals() {
+    const s = this.state.s;
+    return {
+      op0: s === 0 ? 1 : 0, op1: s === 1 ? 1 : 0, pe1: s === 1 ? 'auto' : 'none',
+      prev: () => this.go(s - 1), next: () => this.go(s + 1),
+      dots: [0, 1].map(i => ({ go: () => this.go(i), w: i === s ? '28px' : '12px', bg: i === s ? '#fff' : 'rgba(255,255,255,0.5)' })),
+    };
+  }
+}
+</script>
+</body>
+</html>

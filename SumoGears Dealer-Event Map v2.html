@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sumo Gears — Dealers &amp; Events Map</title>
+<meta name="ext-resource-dependency" content="data/countries-50m.json" data-resource-id="world">
+<meta name="ext-resource-dependency" content="data/admin1-us-ca-au.json" data-resource-id="admin1">
+<meta name="ext-resource-dependency" content="assets/sumo-logo-white-on-transparent.svg" data-resource-id="sumoWhite">
+<meta name="ext-resource-dependency" content="assets/suzuki-s-black.jpg" data-resource-id="suzukiS">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/d3@7.9.0/dist/d3.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/topojson-client@3.1.0/dist/topojson-client.min.js" integrity="sha384-Ukv1p/xTma6P4/2bY5KzWBw+ydSpXmhCMtyciIQVDJ1RmOxtCYNMF1uXT9T63H67" crossorigin="anonymous"></script>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#e4e7ea;font-family:'Zen Kaku Gothic New',sans-serif;color:#1b2126}
+a{color:#0686db;text-decoration:none}a:hover{color:#eb0028}
+.mono{font-family:'IBM Plex Mono',monospace}.mincho{font-family:'Shippori Mincho',serif}
+.page{max-width:1440px;margin:0 auto;background:#fff}
+.hdr{min-height:64px;display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center;justify-content:space-between;padding:10px 40px;border-bottom:3px solid #0686db}
+.brand{display:flex;align-items:center;gap:12px;color:inherit}
+.brand img{width:52px;height:52px;object-fit:contain;display:block}
+.wm{font-weight:900;font-size:21px;letter-spacing:.02em;color:#0f2f57;line-height:1}.wm span{color:#eb0028}
+.nav{display:flex;flex-wrap:wrap;gap:26px;align-items:center;font-weight:500;font-size:14px;color:#3c444c}
+.nav a{color:#3c444c}.nav .on{color:#0a63a8;font-weight:700}
+.intro{display:flex;flex-wrap:wrap;gap:16px 24px;align-items:center;justify-content:space-between;padding:20px 40px}
+h1{font-weight:900;font-size:32px;line-height:1.1;margin:0;letter-spacing:-.01em}
+.sub{display:flex;align-items:center;gap:12px;margin-top:6px}.sub i{width:36px;height:3px;background:#eb0028;display:block}
+.sub span{font-weight:800;font-size:15px;letter-spacing:.05em;color:#0686db}
+.stats{display:flex;gap:1px;background:#e1e3e5;border:1px solid #e1e3e5}
+.stats div{background:#fff;padding:10px 18px;min-width:104px}
+.stats b{display:block;font-weight:900;font-size:24px;color:#0f2f57;line-height:1}
+.stats small{font-size:10px;letter-spacing:.12em;color:#6b7480}
+.legend{display:flex;flex-wrap:wrap;gap:1px;background:#d7dbdf;border-top:1px solid #d7dbdf;border-bottom:1px solid #d7dbdf}
+.lg-h{background:#0f2f57;color:#9dc2e4;font-size:10px;letter-spacing:.14em;display:flex;align-items:center;padding:0 16px}
+.chip{flex:1 1 170px;background:#fff;display:flex;align-items:center;gap:10px;padding:12px 16px;cursor:pointer;border:0;font:inherit;text-align:left;color:#1b2126}
+.chip.off{background:#f2f3f4;color:#9aa0a6}.chip.off svg{opacity:.3}
+.chip .t{font-weight:700;font-size:13.5px;line-height:1.15}.chip .c{font-size:10.5px;color:#6b7480;letter-spacing:.06em}
+.chip .chk{margin-left:auto;width:17px;height:17px;border:2px solid #c2c6ca;border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;flex:0 0 17px}
+.chip:not(.off) .chk{background:#0f2f57;border-color:#0f2f57}
+.body{display:flex;flex-wrap:wrap}
+#map{flex:999 1 640px;min-height:660px;background:#eaf1f7;position:relative;overflow:hidden;cursor:grab}
+#map:active{cursor:grabbing}
+#map svg{display:block;width:100%;height:100%;position:absolute;inset:0}
+.side{flex:1 0 360px;max-width:100%;display:flex;flex-direction:column;background:#0f2f57;color:#fff;max-height:660px}
+.seg-w{padding:14px 18px 0}
+.seg-l{font-size:10px;letter-spacing:.14em;color:#9dc2e4;margin-bottom:8px}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.18)}
+.seg button{border:0;font:inherit;font-weight:700;font-size:12.5px;padding:10px 6px;background:#0f2f57;color:#d4e6f6;cursor:pointer}
+.seg button.on{background:#0686db;color:#fff}
+.search{padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.14)}
+.search input{width:100%;font:inherit;font-size:14px;padding:10px 13px;border:0;border-radius:2px;outline:none;color:#1b2126}
+.count{padding:10px 20px;font-size:10.5px;letter-spacing:.12em;color:#9dc2e4;border-bottom:1px solid rgba(255,255,255,.1)}
+.list{overflow:auto;flex:1}
+.item{display:flex;gap:14px;align-items:flex-start;padding:14px 20px;border-bottom:1px solid rgba(255,255,255,.1);cursor:pointer}
+.item:hover,.item.sel{background:#16406f}
+.item .n{font-weight:700;font-size:15px;line-height:1.25}
+.item .m{font-size:12px;color:#9dc2e4;margin-top:3px}
+.item .bd{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}
+.item .bd span{font-size:9.5px;letter-spacing:.1em;padding:3px 6px;background:rgba(255,255,255,.12);color:#d4e6f6;border-radius:2px}
+.item .go{margin-left:auto;opacity:.6}
+.ftile{flex:0 0 36px;height:36px;background:#fff;border-radius:2px;display:flex;align-items:center;justify-content:center}
+.empty{padding:30px 20px;color:#9dc2e4;font-size:14px}
+.cta{display:flex;align-items:center;justify-content:space-between;padding:17px 20px;background:#eb0028;color:#fff;font-weight:700;font-size:13.5px;letter-spacing:.16em}
+.cta:hover{color:#fff;background:#d10024}
+.mk{cursor:pointer}
+.zoom{position:absolute;top:16px;left:16px;display:flex;flex-direction:column;gap:1px;background:#d7dbdf;border:1px solid #d7dbdf;z-index:3}
+.zoom button{width:38px;height:38px;border:0;background:#fff;font:inherit;font-weight:700;font-size:18px;color:#0f2f57;cursor:pointer}
+.zoom button:hover{background:#0686db;color:#fff}
+.hint{position:absolute;bottom:12px;left:16px;font-size:10.5px;letter-spacing:.1em;color:#6b7480;z-index:3;pointer-events:none}
+.pop{position:absolute;z-index:4;background:#fff;width:290px;border-top:3px solid #0686db;box-shadow:0 6px 22px rgba(15,47,87,.25);transform:translate(-50%,calc(-100% - 40px));cursor:default}
+.pop.below{transform:translate(-50%,18px)}
+.pop .x{position:absolute;top:6px;right:8px;border:0;background:none;font-size:16px;color:#9aa0a6;cursor:pointer}
+.pp-top{display:flex;gap:12px;align-items:center;padding:14px 16px 12px;border-bottom:1px solid #eceff2}
+.pp-logo{flex:0 0 46px;height:46px;border-radius:2px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:15px;letter-spacing:.04em}
+.pp-n{font-weight:900;font-size:16px;line-height:1.2;padding-right:14px}
+.pp-m{font-size:12.5px;color:#5a626a;margin-top:3px}
+.pp-bd{display:flex;flex-wrap:wrap;gap:5px;padding:10px 16px 0}
+.pp-bd span{font-family:'IBM Plex Mono';font-size:9.5px;letter-spacing:.1em;padding:4px 7px;border-radius:2px}
+.pp-rows{padding:10px 16px 14px;display:flex;flex-direction:column;gap:6px;font-size:13px}
+.pp-rows div{display:grid;grid-template-columns:62px 1fr;gap:8px}
+.pp-rows dt{font-family:'IBM Plex Mono';font-size:10px;letter-spacing:.1em;color:#6b7480;padding-top:2px}
+.pp-rows dd{margin:0;color:#1b2126}
+.note{padding:12px 40px;background:#f2f3f4;font-size:12px;color:#6b7480;border-bottom:1px solid #e1e3e5}
+.foot{padding:30px 40px 24px;border-top:3px solid #0686db;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:12px;color:#9aa0a6}
+.st-lbl{font-family:'IBM Plex Mono';fill:#7d8a97;font-size:10px;letter-spacing:.06em;pointer-events:none;text-anchor:middle;paint-order:stroke;stroke:#fff;stroke-width:3px}
+@media (max-width:760px){.hdr,.intro,.note,.foot{padding-left:20px;padding-right:20px}h1{font-size:26px}.side{max-height:none}.list{max-height:460px}}
+</style>
+</head>
+<body>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#0f2f57"/><rect x="34" y="28" width="4" height="46" fill="#fff"/><path d="M38 30h28v20H38z" fill="#eb0028"/></svg></template>
+<div class="page" data-screen-label="Dealer & Event Map v2">
+  <div class="hdr">
+    <a href="SumoGears Homepage.dc.html" class="brand"><img src="assets/sumo-logo.svg" alt="Sumo Gears"><div><div class="wm">SUMO <span>GEARS</span></div><div class="mincho" style="font-weight:600;font-size:9.5px;letter-spacing:.26em;color:#0a63a8;margin-top:3px">日本製 · MADE IN JAPAN</div></div></a>
+    <div class="nav"><a href="SumoGears Product Page v2 - LC 60-70.dc.html">Low Range Gear Sets</a><a href="SumoGears Rebuild Kits.dc.html" style="color:#3c444c">Rebuild Kits</a><span>Community</span><span class="on">Dealers &amp; Events</span><span>About</span></div>
+    <div style="display:flex;align-items:center;gap:16px;font-size:13px;color:#5a626a"><a href="SumoGears FAQ.dc.html" style="color:#5a626a">FAQs</a><a href="SumoGears Contact.dc.html" style="color:#5a626a">Contact</a><span style="background:#0686db;color:#fff;border-radius:2px;padding:7px 11px">⌕</span></div>
+  </div>
+
+  <div class="intro">
+    <div>
+      <h1>Find a dealer. Find the trail.</h1>
+      <div class="sub"><i></i><span class="mincho">Official Sumo Gears dealers and overlanding events, worldwide.</span></div>
+    </div>
+    <div class="stats"><div><b id="sDealers">0</b><small class="mono">OFFICIAL DEALERS</small></div><div><b id="sEvents">0</b><small class="mono">EVENTS</small></div><div><b id="sCountries">0</b><small class="mono">COUNTRIES</small></div></div>
+  </div>
+
+  <div class="legend" id="legend"></div>
+
+  <div class="body">
+    <div id="map"><div class="zoom"><button id="zin" aria-label="Zoom in">+</button><button id="zout" aria-label="Zoom out">−</button><button id="zreset" aria-label="Reset" style="font-size:13px">⟲</button></div><div class="hint mono">DRAG TO PAN · SCROLL OR +/− TO ZOOM · HOVER A PIN FOR DETAILS</div></div>
+    <div class="side">
+      <div class="seg-w"><div class="seg-l mono">LOCATION TYPE</div><div class="seg" id="seg"><button data-v="all" class="on">All</button><button data-v="dist">Distributors</button><button data-v="event">Events</button></div></div>
+      <div class="search"><input id="q" placeholder="Search city, country or name"></div>
+      <div class="count mono" id="count"></div>
+      <div class="list" id="list"></div>
+      <a class="cta" href="SumoGears Contact.dc.html">BECOME A DEALER OR ADD AN EVENT <span>→</span></a>
+    </div>
+  </div>
+  <div class="note">Sample locations and contact details for layout review. The final dealer list and event calendar will come from the Sumo Gears team.</div>
+  <div class="foot"><a href="SumoGears Homepage.dc.html" class="brand"><img src="assets/sumo-logo.svg" alt=""><div class="wm" style="font-size:19px">SUMO <span>GEARS</span></div></a><div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;justify-content:center"><span style="display:flex;gap:18px"><a href="SumoGears Dealer-Event Map v2.html" style="color:#5a626a">Find a Dealer</a><a href="SumoGears FAQ.dc.html" style="color:#5a626a">FAQs</a></span><span class="mincho" style="letter-spacing:.1em;color:#0a63a8">Japanese Made. Trail Proven.</span><span>© 2026 Sumo Gears · All Automotive Import Export</span></div></div>
+</div>
+
+<script>
+const BRAND = { toyota:{label:'Toyota',color:'#eb0028'}, suzuki:{label:'Suzuki',color:'#0a0a0a'}, both:{label:'Toyota + Suzuki',color:'#003399'} };
+const EVENT_COLOR = '#1f8a52';
+const TYPE = { dist:'Distributor' };
+const D = [
+  ['official','both','dist','All Automotive Import Export (HQ)','Bend, OR','USA',44.07,-121.29,'assets/sumo-logo.svg'],
+  ['official','toyota','dist','Cruiser Teq · Cruiser Outfitters','Murray, UT','USA',40.636,-111.888,null,{addr:'6531 S Cottonwood St, Murray, UT 84107',phone:'801.563.1277',email:'Contact form',emailHref:'https://cruiserteq.com/contact-us/',web:'cruiserteq.com',webHref:'https://cruiserteq.com/',real:true}],
+  ['official','toyota','dist','Lone Star Overland','Austin, TX','USA',30.267,-97.743],
+  ['official','both','dist','Rocky Mountain Drivetrain','Calgary, AB','Canada',51.045,-114.072],
+  ['official','toyota','dist','Bajío Todoterreno','Querétaro','Mexico',20.588,-100.39],
+  ['official','suzuki','dist','Trilha Suzuki','São Paulo','Brazil',-23.55,-46.633],
+  ['official','both','dist','Andes 4x4','Santiago','Chile',-33.449,-70.669],
+  ['official','suzuki','dist','Jimny Werk','Munich','Germany',48.135,11.582],
+  ['official','both','dist','Iberia 4x4 Parts','Valencia','Spain',39.47,-0.376],
+  ['official','toyota','dist','Karoo Cruiser Supply','Cape Town','South Africa',-33.925,18.424],
+  ['official','toyota','dist','Gulf Desert Drivetrain','Dubai','UAE',25.205,55.271],
+  ['official','suzuki','dist','Outback Zook Parts','Brisbane, QLD','Australia',-27.47,153.026],
+  ['buyer','both','dist','Midwest Driveline Supply','Omaha, NE','USA',41.257,-95.995],
+  ['buyer','both','dist','Ontario 4x4 Parts','Toronto, ON','Canada',43.653,-79.383],
+  ['buyer','suzuki','dist','Leeds 4WD Spares','Leeds','UK',53.801,-1.549],
+  ['buyer','toyota','dist','Highveld Drivetrain','Johannesburg','South Africa',-26.204,28.047],
+];
+const E = [
+  ['King of the Hammers','Johnson Valley, CA','Feb','USA',34.42,-116.6],
+  ['Overland Expo West','Flagstaff, AZ','May','USA',35.198,-111.651],
+  ['Overland Expo Mountain West','Loveland, CO','Aug','USA',40.398,-105.075],
+  ['Overland Expo East','Arrington, VA','Oct','USA',37.68,-78.93],
+  ['80s on Edison · Technique Vehicle Outfitters','Bend, OR','Oct','USA',44.058,-121.315],
+  ['Cruise Moab','Moab, UT','Apr','USA',38.62,-109.62],
+  ['Rubicon Trail Run','Georgetown, CA','Jul','USA',39.0,-120.25],
+  ['Rausch Creek Crawl','Pine Grove, PA','Sep','USA',40.56,-76.38],
+  ['Abenteuer & Allrad','Bad Kissingen','Jun','Germany',50.2,10.078],
+  ['Ultra4 Europe Round','Portugal','Jun','Portugal',39.6,-8.4],
+  ['Overland Africa Rally','Maun','Aug','Botswana',-19.98,23.42],
+  ['Victorian High Country Muster','Mansfield, VIC','Mar','Australia',-37.05,146.09],
+  ['Patagonia Overland Meet','Bariloche','Jan','Argentina',-41.133,-71.31],
+  ['Hilux Hill Climb','Rotorua','Feb','New Zealand',-38.137,176.25],
+];
+const slug = s => s.toLowerCase().replace(/\(.*?\)/g,'').replace(/[^a-z0-9]+/g,'').slice(0,22);
+const initials = s => s.replace(/\(.*?\)/g,'').split(/\s+/).filter(w=>/^[A-Za-zÀ-ÿ]/.test(w)).slice(0,2).map(w=>w[0]).join('').toUpperCase();
+const P = [
+  ...D.map(([tier,brand,type,name,city,country,lat,lng,logo,extra])=>({kind:tier,brand,type,name,city,country,lat,lng,logo,extra})),
+  ...E.map(([name,city,month,country,lat,lng])=>({kind:'event',name,city,month,country,lat,lng})),
+].map((p,id)=>{ p.id=id; if(p.kind!=='event'){ const s=slug(p.name); p.addr=`${120+id*37} Industrial Way, ${p.city}`; p.phone=`(555) 010-${String(1000+id*13).slice(-4)}`; p.email=`info@${s}.com`; p.web=`${s}.com`; if(p.extra) Object.assign(p,p.extra); } return p; });
+
+const SUMO_W = (window.__resources&&window.__resources.sumoWhite)||'assets/sumo-logo-white-on-transparent.svg';
+const MARK = { toyota:'T', suzuki:'S' };
+const flagDealer = (brand,s=1)=>{ const c=BRAND[brand].color;
+  const mark = '';
+  return `<svg width="${34*s}" height="${36*s}" viewBox="0 0 34 36" overflow="visible"><rect x="3" y="2" width="2.4" height="33" rx="1" fill="#1b2126"/><path d="M5 2.5h28v19H5z" fill="${c}" stroke="#fff" stroke-width="1.2"/>${mark}<circle cx="4.2" cy="34.5" r="2.4" fill="#1b2126"/></svg>`; };
+const LEG_MARK = {
+  toyota:`<g fill="none" stroke="#fff" stroke-width="1.1"><ellipse cx="19" cy="12" rx="7.6" ry="5.4"/><ellipse cx="19" cy="9.7" rx="4.9" ry="2.1"/><ellipse cx="19" cy="12.7" rx="2.1" ry="4.3"/></g>`,
+  suzuki:`<image href="${(window.__resources||{}).suzukiS||'assets/suzuki-s-black.jpg'}" x="12.3" y="4.6" width="13.4" height="13.8" preserveAspectRatio="xMidYMid meet"/>`,
+  both:`<image href="${SUMO_W}" x="11.5" y="4.5" width="15" height="15" preserveAspectRatio="xMidYMid meet"/>`,
+};
+const flagLegend = (brand,s=1)=>flagDealer(brand,s).replace('<circle cx="4.2"',LEG_MARK[brand]+'<circle cx="4.2"');
+const flagRect = (c,s=1)=>flagDealer(Object.keys(BRAND).find(k=>BRAND[k].color===c)||'both',s);
+const flagTri = (c,s=1)=>`<svg width="${26*s}" height="${32*s}" viewBox="0 0 26 32" overflow="visible"><rect x="3" y="2" width="2.4" height="29" rx="1" fill="#1b2126"/><path d="M5 3l18 7L5 17z" fill="${c}" stroke="#fff" stroke-width="1.2" stroke-linejoin="round"/><circle cx="4.2" cy="30.5" r="2.4" fill="#1b2126"/></svg>`;
+const dot = (c,s=1)=>`<svg width="${16*s}" height="${16*s}" viewBox="0 0 16 16" overflow="visible"><circle cx="8" cy="8" r="5.5" fill="#fff" stroke="${c}" stroke-width="2.6"/></svg>`;
+const glyph = (p,s=1)=> p.kind==='event'?flagTri(EVENT_COLOR,s):p.kind==='buyer'?dot(BRAND[p.brand].color,s):flagDealer(p.brand,s);
+
+const F = { toyota:true, suzuki:true, both:true, event:true, buyer:false };
+let typeF='all', q='', sel=null, pinned=false;
+const LEG = [
+  {k:'toyota',t:'Toyota gears/kits dealer',g:flagLegend('toyota',1.1),n:()=>P.filter(p=>p.kind==='official'&&p.brand==='toyota').length,u:'OFFICIAL'},
+  {k:'suzuki',t:'Suzuki gears/kits dealer',g:flagLegend('suzuki',1.1),n:()=>P.filter(p=>p.kind==='official'&&p.brand==='suzuki').length,u:'OFFICIAL'},
+  {k:'both',t:'Toyota + Suzuki dealer',g:flagLegend('both',1.1),n:()=>P.filter(p=>p.kind==='official'&&p.brand==='both').length,u:'OFFICIAL'},
+  {k:'event',t:'Events',g:flagTri(EVENT_COLOR,.85),n:()=>P.filter(p=>p.kind==='event').length,u:'OVERLAND + CRAWL'},
+];
+
+function visible(p){
+  if(typeF==='event' && p.kind!=='event') return false;
+  if(p.kind==='event') { if(!F.event) return false; if(typeF==='dist') return false; }
+  else if(p.kind==='buyer') { if(!F.buyer) return false; }
+  else if(!F[p.brand]) return false;
+  if(p.kind!=='event' && typeF==='dist' && p.type!=='dist') return false;
+  if(q && !(p.name+' '+p.city+' '+p.country).toLowerCase().includes(q)) return false;
+  return true;
+}
+
+// map
+const mapEl=document.getElementById('map');
+const svg=d3.select(mapEl).append('svg');
+const root=svg.append('g'), land=root.append('g'), lblLayer=svg.append('g'), jpLayer=svg.append('g'), mkLayer=svg.append('g');
+let W=0,H=0,proj=d3.geoNaturalEarth1(),path=d3.geoPath(proj),countries=null,admin1=null,T=d3.zoomIdentity;
+const JP=[138.3,36.6];
+const pop=document.createElement('div');pop.className='pop';pop.style.display='none';mapEl.appendChild(pop);
+['mousedown','wheel','touchstart','dblclick'].forEach(ev=>pop.addEventListener(ev,e=>e.stopPropagation()));
+let hideT=null;
+pop.addEventListener('mouseenter',()=>clearTimeout(hideT));
+pop.addEventListener('mouseleave',()=>{ if(!pinned) scheduleHide(); });
+const zoom=d3.zoom().scaleExtent([1,14]).on('zoom',e=>{T=e.transform;root.attr('transform',T);place();});
+svg.call(zoom).on('dblclick.zoom',null);
+svg.on('click',()=>{ if(pinned){ hidePop(); } });
+function size(){
+  W=mapEl.clientWidth;H=mapEl.clientHeight;
+  proj.fitExtent([[10,10],[W-10,H-10]],{type:'Sphere'});
+  zoom.translateExtent([[0,0],[W,H]]).extent([[0,0],[W,H]]);
+  drawLand(); place();
+}
+function drawLand(){
+  land.selectAll('*').remove();
+  land.append('path').datum({type:'Sphere'}).attr('d',path).attr('fill','#eaf1f7');
+  land.append('path').datum(d3.geoGraticule10()).attr('d',path).attr('fill','none').attr('stroke','#d8e3ed').attr('stroke-width',.5).attr('vector-effect','non-scaling-stroke');
+  if(countries) land.selectAll('.c').data(countries).join('path').attr('class','c').attr('d',path)
+    .attr('fill',d=>d.id==='392'?'#0686db':'#ffffff').attr('stroke',d=>d.id==='392'?'#0a63a8':'#b9c5d1').attr('stroke-width',.7).attr('vector-effect','non-scaling-stroke');
+  if(admin1) land.selectAll('.s').data(admin1.features).join('path').attr('class','s').attr('d',path).attr('fill','none').attr('stroke','#d3dbe3').attr('stroke-width',.6).attr('vector-effect','non-scaling-stroke');
+  if(admin1){
+    lblLayer.selectAll('text').data(admin1.features.filter(f=>f.properties.lat!=null)).join('text').attr('class','st-lbl').text(d=>d.properties.a||d.properties.n);
+  }
+}
+P.forEach(p=>{
+  const off = p.kind==='buyer' ? 'translate(-8,-8)' : p.kind==='event' ? 'translate(-4,-31)' : 'translate(-4,-35)';
+  p.g=mkLayer.append('g').attr('class','mk').html(`<g transform="${off}">${glyph(p)}</g>`)
+    .on('mouseenter',()=>{ if(!pinned) showPop(p); })
+    .on('mouseleave',()=>{ if(!pinned) scheduleHide(); })
+    .on('click',e=>{ e.stopPropagation(); pinned=true; showPop(p); });
+});
+// Made in Japan badge
+const jp=jpLayer.append('g').attr('class','mk');
+jp.html(`<g class="jpb" transform="translate(14,-30)"><rect width="128" height="38" rx="2" fill="#0f2f57"/><rect width="4" height="38" fill="#eb0028"/><text x="14" y="16" fill="#fff" font-family="IBM Plex Mono" font-size="10.5" letter-spacing="1.4" font-weight="600">MADE IN JAPAN</text><text x="14" y="30" fill="#5eb4ec" font-family="Shippori Mincho" font-size="11" letter-spacing="2.5" font-weight="600">日本製</text></g><circle r="5" fill="#fff" stroke="#0f2f57" stroke-width="2.5"/>`);
+const JPP={kind:'japan',lng:JP[0],lat:JP[1]};
+jp.on('mouseenter',()=>{ if(!pinned) showPop(JPP); }).on('mouseleave',()=>{ if(!pinned) scheduleHide(); }).on('click',e=>{e.stopPropagation();pinned=true;showPop(JPP);});
+
+const xy=p=>T.apply(proj([p.lng,p.lat]));
+function place(){
+  P.forEach(p=>{const [x,y]=xy(p);p.g.attr('transform',`translate(${x},${y})`);});
+  const [jx,jy]=T.apply(proj(JP)); jp.attr('transform',`translate(${jx},${jy})`); jp.select('.jpb').attr('transform', jx+150>W ? 'translate(-142,-30)' : 'translate(14,-30)');
+  const k=T.k;
+  lblLayer.selectAll('text').attr('display',k>=2.6?null:'none').each(function(d){
+    const [x,y]=T.apply(proj([d.properties.lng,d.properties.lat]));
+    d3.select(this).attr('x',x).attr('y',y).text(k>=5.5?d.properties.n:(d.properties.a||d.properties.n));
+  });
+  if(cur && pop.style.display!=='none'){ const [x,y]=xy(cur); pop.style.left=x+'px'; pop.style.top=y+'px'; pop.classList.toggle('below', y<300); const cx=Math.max(155,Math.min(W-155,x)); pop.style.left=cx+'px'; }
+}
+let cur=null;
+function badge(txt,bg,fg){ return `<span style="background:${bg};color:${fg}">${txt}</span>`; }
+function showPop(p){
+  clearTimeout(hideT); cur=p;
+  let h='';
+  if(p.kind==='japan'){
+    pop.style.borderTopColor='#0686db';
+    h=`<div class="pp-top"><div class="pp-logo" style="background:#0686db">日本</div><div><div class="pp-n">Made in Japan</div><div class="pp-m">Sumo Gears manufacturing</div></div></div><div class="pp-rows" style="font-size:13px;line-height:1.55;color:#5a626a;display:block">Every Sumo Gear is manufactured in Japan by an O.E. supplier to Japan's largest automakers, and etched “Sumo Gear · Made in Japan”.</div>`;
+  } else if(p.kind==='event'){
+    pop.style.borderTopColor=EVENT_COLOR;
+    h=`<div class="pp-top"><div class="pp-logo" style="background:${EVENT_COLOR}">${p.month.toUpperCase()}</div><div><div class="pp-n">${p.name}</div><div class="pp-m">${p.city} · ${p.country}</div></div></div><div class="pp-bd">${badge('EVENT','#e6f3ec','#1f6b41')}${badge(p.month.toUpperCase()+' 2027','#eef1f4','#3c444c')}</div><div class="pp-rows"><a href="#" style="font-weight:700">Event details →</a></div>`;
+  } else {
+    const b=BRAND[p.brand]; const off=p.kind==='official';
+    pop.style.borderTopColor=off?b.color:'#9aa0a6';
+    const logoEl = p.logo
+      ? `<div class="pp-logo" style="background:#fff;border:1px solid #e1e3e5;padding:4px"><img src="${p.logo}" alt="${p.name} logo" style="max-width:100%;max-height:100%;object-fit:contain;display:block"></div>`
+      : `<div class="pp-logo" style="background:${off?b.color:'#fff'};color:${off?'#fff':b.color};border:${off?'0':'2px solid '+b.color}" title="Dealer logo pending">${initials(p.name)}</div>`;
+    h=`<div class="pp-top">${logoEl}<div><div class="pp-n">${p.name}</div><div class="pp-m">${p.city} · ${p.country}</div></div></div>
+      <div class="pp-bd">${off?badge('OFFICIAL SUMO GEARS DEALER','#0f2f57','#fff'):badge('PARTS BUYER · NOT AN OFFICIAL DEALER','#f2f3f4','#5a626a')}${badge(TYPE[p.type].toUpperCase(),'#eef6fd','#0a63a8')}</div>
+      <div class="pp-rows"><div><dt>BRANDS</dt><dd>${b.label}</dd></div><div><dt>ADDRESS</dt><dd>${p.addr}</dd></div><div><dt>PHONE</dt><dd><a href="tel:${p.phone.replace(/[^0-9+]/g,'')}">${p.phone}</a></dd></div><div><dt>EMAIL</dt><dd><a href="${p.emailHref||('mailto:'+p.email)}" target="_blank">${p.email}</a></dd></div><div><dt>WEB</dt><dd><a href="${p.webHref||'#'}" target="_blank">${p.web}</a></dd></div></div>`;
+  }
+  pop.innerHTML=`<button class="x" aria-label="Close">×</button>`+h;
+  pop.querySelector('.x').onclick=e=>{e.stopPropagation();hidePop();};
+  pop.style.display='block'; sel=p.id??null; place(); renderList(false);
+}
+function scheduleHide(){ clearTimeout(hideT); hideT=setTimeout(hidePop,220); }
+function hidePop(){ pop.style.display='none'; cur=null; pinned=false; if(sel!=null){ sel=null; renderList(false); } }
+function flyTo(p,k=5){
+  const [x,y]=proj([p.lng,p.lat]);
+  svg.transition().duration(800).call(zoom.transform,d3.zoomIdentity.translate(W/2,H/2+80).scale(k).translate(-x,-y)).on('end',()=>{pinned=true;showPop(p);});
+}
+document.getElementById('zin').onclick=()=>svg.transition().duration(300).call(zoom.scaleBy,1.6);
+document.getElementById('zout').onclick=()=>svg.transition().duration(300).call(zoom.scaleBy,1/1.6);
+document.getElementById('zreset').onclick=()=>{hidePop();svg.transition().duration(500).call(zoom.transform,d3.zoomIdentity);};
+new ResizeObserver(size).observe(mapEl);
+const R=window.__resources||{};
+Promise.all([d3.json(R.world||'data/countries-50m.json'), d3.json(R.admin1||'data/admin1-us-ca-au.json')]).then(([t,a])=>{
+  countries=topojson.feature(t,t.objects.countries).features.filter(f=>f.id!=='010');
+  admin1=a; drawLand(); place();
+});
+
+// UI
+function renderLegend(){
+  document.getElementById('legend').innerHTML=`<div class="lg-h mono">SHOW</div>`+LEG.map(l=>`<button class="chip${F[l.k]?'':' off'}" data-k="${l.k}">${l.g}<div><div class="t">${l.t}</div><div class="c mono">${l.n()} · ${l.u}</div></div><span class="chk">✓</span></button>`).join('');
+}
+const order={official:0,event:1,buyer:2};
+function renderList(updateMarkers=true){
+  const vis=P.filter(visible).sort((a,b)=>order[a.kind]-order[b.kind]);
+  if(updateMarkers){ P.forEach(p=>p.g.style('display',vis.includes(p)?null:'none')); if(cur && cur.kind!=='japan' && !vis.includes(cur)) hidePop(); }
+  document.getElementById('count').textContent=`${vis.length} ${vis.length===1?'RESULT':'RESULTS'}`;
+  const el=document.getElementById('list');
+  el.innerHTML = vis.length ? vis.map(p=>{
+    const bd = p.kind==='event' ? `<span>EVENT</span><span>${p.month.toUpperCase()}</span>`
+      : `<span>${p.kind==='official'?'OFFICIAL':'PARTS BUYER'}</span><span>${TYPE[p.type].toUpperCase()}</span><span>${BRAND[p.brand].label.toUpperCase()}</span>`;
+    return `<div class="item${sel===p.id?' sel':''}" data-id="${p.id}"><span class="ftile">${glyph(p,.8)}</span><div><div class="n">${p.name}</div><div class="m">${p.city} · ${p.country}</div><div class="bd mono">${bd}</div></div><span class="go">→</span></div>`;
+  }).join('') : '<div class="empty">No matches. Try another filter or city.</div>';
+}
+document.getElementById('sDealers').textContent=P.filter(p=>p.kind==='official').length;
+document.getElementById('sEvents').textContent=P.filter(p=>p.kind==='event').length;
+document.getElementById('sCountries').textContent=new Set(P.filter(p=>p.kind!=='buyer').map(p=>p.country)).size;
+document.getElementById('legend').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;F[b.dataset.k]=!F[b.dataset.k];renderLegend();renderList();});
+document.getElementById('seg').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;typeF=b.dataset.v;document.querySelectorAll('#seg button').forEach(t=>t.classList.toggle('on',t===b));renderList();});
+document.getElementById('q').addEventListener('input',e=>{q=e.target.value.trim().toLowerCase();renderList();});
+document.getElementById('list').addEventListener('click',e=>{const it=e.target.closest('.item');if(!it)return;flyTo(P[+it.dataset.id]);});
+renderLegend(); renderList();
+</script>
+</body>
+</html>

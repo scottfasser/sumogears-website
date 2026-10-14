@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="./faq-data.js"></script>
+<style>
+* { box-sizing: border-box; }
+body { margin: 0; background: #e4e7ea; }
+a { color: #0686db; text-decoration: none; }
+a:hover { color: #eb0028; }
+html { scroll-behavior: smooth; }
+</style>
+</helmet>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#eb0028"/><circle cx="50" cy="50" r="20" fill="none" stroke="#fff" stroke-width="8"/><circle cx="50" cy="50" r="6" fill="#fff"/></svg></template>
+
+<div data-screen-label="Rebuild Kits" style="max-width:1440px; margin:0 auto; background:#fff; font-family:'Zen Kaku Gothic New', sans-serif; color:#1b2126;">
+
+  <div style="min-height:64px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:14px 28px; padding:10px 40px; background:#fff; border-bottom:3px solid #0686db;">
+    <a href="SumoGears Homepage.dc.html" style="display:flex; align-items:center; gap:12px;">
+      <img src="assets/sumo-logo.svg" alt="Sumo Gears" style="width:52px; height:52px; display:block; object-fit:contain;">
+      <div style="line-height:1;"><div style="font-weight:900; font-size:21px; letter-spacing:0.02em; color:#0f2f57;">SUMO <span style="color:#eb0028;">GEARS</span></div><div style="font-family:'Shippori Mincho'; font-weight:600; font-size:9.5px; letter-spacing:0.26em; color:#0a63a8; margin-top:3px;">日本製 · MADE IN JAPAN</div></div>
+    </a>
+    <div style="display:flex; flex-wrap:wrap; align-items:center; gap:26px; font-weight:500; font-size:14px; color:#3c444c;">
+      <a href="SumoGears Product Page v2 - LC 60-70.dc.html" style="color:#3c444c;">Low Range Gear Sets</a><span style="color:#0a63a8; font-weight:700;">Rebuild Kits</span><span>Community</span><a href="SumoGears Dealer-Event Map v2.html" style="color:#3c444c;">Dealers &amp; Events</a><span>About</span>
+    </div>
+    <div style="display:flex; align-items:center; gap:16px; font-size:13px; color:#5a626a;">
+      <a href="SumoGears FAQ.dc.html" style="color:#5a626a;">FAQs</a><a href="SumoGears Contact.dc.html" style="color:#5a626a;">Contact</a>
+      <a href="SumoGears Dealer-Event Map v2.html" style="background:#eb0028; color:#fff; font-weight:700; font-size:13.5px; padding:9px 16px; border-radius:2px;">Find a Dealer</a>
+      <span style="background:#0686db; color:#fff; border-radius:2px; padding:7px 11px;">⌕</span>
+    </div>
+  </div>
+
+  <div style="min-height:56px; padding:8px 40px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:10px; background:#f2f3f4; border-bottom:1px solid #e1e3e5;">
+    <div style="display:flex; flex-wrap:wrap; align-items:center; gap:14px;">
+      <div style="display:flex; gap:1px; background:#d7dbdf; border:1px solid #d7dbdf;">
+        <sc-for list="{{ brands }}" as="b" hint-placeholder-count="2">
+          <div onClick="{{ b.select }}" style="background:{{ b.bg }}; color:{{ b.fg }}; font-weight:900; font-size:15.5px; letter-spacing:0.08em; padding:8px 18px; cursor:pointer;">{{ b.label }}</div>
+        </sc-for>
+      </div>
+      <div style="font-family:'IBM Plex Mono'; font-size:11px; letter-spacing:0.08em; color:#6b7480;">REBUILD KITS / {{ brandUpper }} / <span style="color:#0a63a8;">{{ plat.crumb }}</span></div>
+    </div>
+    <div style="display:flex; flex-wrap:wrap; gap:1px; background:#d7dbdf; border:1px solid #d7dbdf;">
+      <sc-for list="{{ series }}" as="s" hint-placeholder-count="4">
+        <div onClick="{{ s.select }}" style="background:{{ s.bg }}; color:{{ s.fg }}; font-weight:700; font-size:15.5px; padding:8px 16px; cursor:pointer;">{{ s.label }}</div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="display:flex; flex-wrap:wrap;">
+    <div style="flex:999 1 760px; min-width:0; padding:24px 40px 40px;">
+      <div style="display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 20px; margin-bottom:22px;">
+        <h1 style="font-weight:900; font-size:36px; line-height:1.08; margin:0; letter-spacing:-0.01em;">{{ plat.title }}</h1>
+        <div style="display:flex; align-items:center; gap:12px;"><div style="width:36px; height:3px; background:#eb0028;"></div><div style="font-family:'Shippori Mincho'; font-weight:800; font-size:16px; letter-spacing:0.05em; color:#0686db;">Premium Rebuild Kits</div></div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap:36px;">
+        <div style="min-width:0;">
+          <div style="position:relative; background:#fff; aspect-ratio:4/3; overflow:hidden;">
+            <sc-if value="{{ cat.hasImg }}" hint-placeholder-val="{{ true }}">
+              <img src="{{ cat.img }}" alt="{{ cat.name }}" style="width:100%; height:100%; object-fit:contain; display:block; background:#fff;">
+            </sc-if>
+            <sc-if value="{{ cat.noImg }}" hint-placeholder-val="{{ false }}">
+              <div style="position:absolute; inset:0; background:repeating-linear-gradient(45deg,#e8ecf0,#e8ecf0 12px,#f2f4f6 12px,#f2f4f6 24px); display:flex; align-items:center; justify-content:center;">
+                <span style="font-family:'IBM Plex Mono'; font-size:11px; letter-spacing:0.12em; color:#6b7480; background:#fff; padding:8px 12px;">{{ cat.pending }}</span>
+              </div>
+            </sc-if>
+            <div style="position:absolute; top:12px; left:12px; background:#0a63a8; color:#fff; font-family:'Shippori Mincho'; font-size:10.5px; letter-spacing:0.18em; padding:6px 11px; pointer-events:none;">MADE IN JAPAN</div>
+            <div onClick="{{ prev }}" style="position:absolute; left:0; top:50%; transform:translateY(-50%); width:40px; height:56px; background:rgba(255,255,255,0.92); border:1px solid #e1e3e5; border-left:0; display:flex; align-items:center; justify-content:center; font-size:20px; color:#0f2f57; cursor:pointer;">‹</div>
+            <div onClick="{{ next }}" style="position:absolute; right:0; top:50%; transform:translateY(-50%); width:40px; height:56px; background:rgba(255,255,255,0.92); border:1px solid #e1e3e5; border-right:0; display:flex; align-items:center; justify-content:center; font-size:20px; color:#0f2f57; cursor:pointer;">›</div>
+          </div>
+          <div style="display:grid; grid-template-columns:repeat(5, minmax(0,1fr)); gap:6px; margin-top:8px;">
+            <sc-for list="{{ thumbs }}" as="t" hint-placeholder-count="5">
+              <div onClick="{{ t.select }}" style="aspect-ratio:1; background:#f2f3f4; border:2px solid {{ t.border }}; overflow:hidden; cursor:pointer; display:flex; align-items:center; justify-content:center;">
+                <sc-if value="{{ t.hasImg }}" hint-placeholder-val="{{ true }}"><img src="{{ t.img }}" alt="" style="width:100%; height:100%; object-fit:cover; display:block; background:#fff;"></sc-if>
+                <sc-if value="{{ t.noImg }}" hint-placeholder-val="{{ false }}"><span style="font-family:'IBM Plex Mono'; font-size:10px; color:#6b7480; text-align:center;">{{ t.tab }}</span></sc-if>
+              </div>
+            </sc-for>
+          </div>
+          <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px; margin-top:10px; font-family:'IBM Plex Mono'; font-size:10.5px; letter-spacing:0.08em; color:#6b7480;"><span>{{ cat.caption }}</span><span>{{ cat.pos }}</span></div>
+        </div>
+
+        <div style="min-width:0;">
+          <div style="font-family:'IBM Plex Mono'; font-size:10.5px; letter-spacing:0.16em; color:#6b7480; margin-bottom:8px;">SELECT KIT TYPE</div>
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(96px, 1fr)); gap:1px; background:#d7dbdf; border:1px solid #d7dbdf; margin-bottom:22px;">
+            <sc-for list="{{ catTabs }}" as="c" hint-placeholder-count="5">
+              <div onClick="{{ c.select }}" style="background:{{ c.bg }}; color:{{ c.fg }}; border-top:3px solid {{ c.bar }}; padding:10px 10px 12px; cursor:pointer;">
+                <div style="font-weight:900; font-size:15px; line-height:1; white-space:nowrap;">{{ c.tab }}</div>
+                <div style="font-family:'IBM Plex Mono'; font-size:9.5px; letter-spacing:0.04em; margin-top:6px; opacity:0.85;">{{ c.short }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="font-family:'IBM Plex Mono'; font-size:10.5px; letter-spacing:0.16em; color:#eb0028; margin-bottom:6px;">KIT TYPE · {{ cat.kindUpper }}</div>
+          <h2 style="font-weight:900; font-size:28px; line-height:1.1; margin:0 0 10px;">{{ cat.name }}</h2>
+          <p style="font-size:14.5px; line-height:1.65; color:#5a626a; margin:0 0 18px; text-wrap:pretty;">{{ cat.desc }}</p>
+
+          <sc-if value="{{ cat.hasKits }}" hint-placeholder-val="{{ true }}">
+            <div style="font-family:'IBM Plex Mono'; font-size:10.5px; letter-spacing:0.16em; color:#6b7480; margin-bottom:8px;">AVAILABLE KITS · {{ plat.shortUpper }}</div>
+            <div style="border:1px solid #e1e3e5; margin-bottom:16px;">
+              <sc-for list="{{ cat.kits }}" as="k" hint-placeholder-count="3">
+                <div style="display:flex; justify-content:space-between; align-items:center; gap:16px; padding:11px 16px; border-bottom:1px solid #eceff2; font-size:13.5px;">
+                  <span style="color:#1b2126;">{{ k.use }}<sc-if value="{{ k.verify }}" hint-placeholder-val="{{ false }}"><span style="font-family:'IBM Plex Mono'; font-size:9.5px; letter-spacing:0.08em; color:#eb0028; margin-left:8px;">VERIFY APPLICATION</span></sc-if></span>
+                  <span style="font-family:'IBM Plex Mono'; font-weight:600; color:#0a63a8; white-space:nowrap;">{{ k.part }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </sc-if>
+          <sc-if value="{{ cat.noKits }}" hint-placeholder-val="{{ false }}">
+            <div style="background:#f2f3f4; border:1px dashed #c2c6ca; padding:18px 16px; margin-bottom:16px; font-size:14px; color:#3c444c;"><span style="font-family:'IBM Plex Mono'; font-size:10.5px; letter-spacing:0.12em; color:#eb0028; display:block; margin-bottom:4px;">IN DEVELOPMENT</span>This kit is under development. Check back soon, or ask a dealer about availability.</div>
+          </sc-if>
+
+          <div style="display:flex; flex-direction:column; font-size:13.5px; margin-bottom:20px;">
+            <sc-if value="{{ cat.hasAlso }}" hint-placeholder-val="{{ true }}">
+              <div style="display:flex; justify-content:space-between; gap:16px; padding:8px 0; border-bottom:1px solid #eceff2;"><span style="color:#6b7480;">Also available</span><span style="font-weight:700; text-align:right;">{{ cat.also }}</span></div>
+            </sc-if>
+            <sc-if value="{{ cat.hasNote }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex; justify-content:space-between; gap:16px; padding:8px 0; border-bottom:1px solid #eceff2;"><span style="color:#6b7480;">{{ cat.noteLabel }}</span><span style="font-weight:700; text-align:right;">{{ cat.note }}</span></div>
+            </sc-if>
+            <div style="display:flex; justify-content:space-between; gap:16px; padding:8px 0; border-bottom:1px solid #eceff2;"><span style="color:#6b7480;">Components</span><span style="font-weight:700; text-align:right;">Bearings · seals · gaskets</span></div>
+            <div style="display:flex; justify-content:space-between; gap:16px; padding:8px 0; border-bottom:1px solid #eceff2;"><span style="color:#6b7480;">Kit origin</span><span style="font-weight:700; text-align:right;">Made in Japan</span></div>
+          </div>
+          <div style="display:flex; flex-wrap:wrap; gap:10px;">
+            <a href="SumoGears Dealer-Event Map v2.html" style="background:#eb0028; color:#fff; font-weight:700; font-size:14.5px; padding:13px 24px; border-radius:2px;">Find a Dealer</a>
+            <a href="#compare" style="border:2px solid #0a63a8; color:#0a63a8; font-weight:700; font-size:14.5px; padding:11px 22px; border-radius:2px;">All {{ plat.short }} kits</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="flex:1 0 220px; background:#0f2f57; display:grid; grid-template-columns:repeat(auto-fit, minmax(210px,1fr)); grid-auto-rows:minmax(60px,1fr);">
+      <a href="SumoGears Dealer-Event Map v2.html" style="display:flex; align-items:center; justify-content:space-between; padding:0 22px; font-weight:700; font-size:13.5px; letter-spacing:0.14em; color:#fff; border-bottom:1px solid rgba(255,255,255,0.14); background:#eb0028;"><span>FIND A DEALER</span><span style="opacity:0.7;">→</span></a>
+      <a href="SumoGears Product Page v2 - LC 60-70.dc.html" style="display:flex; align-items:center; justify-content:space-between; padding:0 22px; font-weight:700; font-size:13.5px; letter-spacing:0.14em; color:#d4e6f6; border-bottom:1px solid rgba(255,255,255,0.14);"><span>LOW RANGE GEAR SETS</span><span style="opacity:0.7;">→</span></a>
+      <a href="SumoGears Rebuild Kits.dc.html" style="display:flex; align-items:center; justify-content:space-between; padding:0 22px; font-weight:700; font-size:13.5px; letter-spacing:0.14em; color:#fff; border-bottom:1px solid rgba(255,255,255,0.14); background:#0686db;"><span>REBUILD KITS</span><span style="opacity:0.7;">→</span></a>
+      <span style="display:flex; align-items:center; justify-content:space-between; padding:0 22px; font-weight:700; font-size:13.5px; letter-spacing:0.14em; color:#d4e6f6; border-bottom:1px solid rgba(255,255,255,0.14);"><span>STORE - MERCH</span><span style="opacity:0.7;">↗</span></span>
+      <a href="#faq" style="display:flex; align-items:center; justify-content:space-between; padding:0 22px; font-weight:700; font-size:13.5px; letter-spacing:0.14em; color:#d4e6f6; border-bottom:1px solid rgba(255,255,255,0.14);"><span>FAQ</span><span style="opacity:0.7;">→</span></a>
+      <a href="SumoGears Contact.dc.html" style="display:flex; align-items:center; justify-content:space-between; padding:0 22px; font-weight:700; font-size:13.5px; letter-spacing:0.14em; color:#d4e6f6;"><span>CONTACT</span><span style="opacity:0.7;">→</span></a>
+    </div>
+  </div>
+
+  <div id="compare" style="background:#eef1f4; padding:48px 40px; border-top:1px solid #e1e3e5;">
+    <div style="display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:20px; margin-bottom:22px;">
+      <div>
+        <div style="font-family:'Shippori Mincho'; font-weight:600; font-size:13px; letter-spacing:0.22em; color:#eb0028; margin-bottom:8px;">一覧 · ALL KITS</div>
+        <h2 style="font-weight:900; font-size:30px; margin:0;">{{ plat.short }} rebuild kits</h2>
+      </div>
+      <div style="font-family:'IBM Plex Mono'; font-size:11px; letter-spacing:0.12em; color:#6b7480;">{{ kitCount }}</div>
+    </div>
+    <div style="background:#fff; border:1px solid #e1e3e5; overflow-x:auto;">
+      <div style="min-width:760px;">
+        <div style="display:grid; grid-template-columns:1.1fr 2.4fr 1.1fr 1.6fr; gap:12px; background:#eb0028; color:#fff; font-family:'IBM Plex Mono'; font-size:10.5px; letter-spacing:0.1em; padding:13px 22px;">
+          <span>KIT TYPE</span><span>APPLICATION</span><span>PART #</span><span>ALSO AVAILABLE</span>
+        </div>
+        <sc-for list="{{ rows }}" as="row" hint-placeholder-count="8">
+          <div onClick="{{ row.select }}" style="display:grid; grid-template-columns:1.1fr 2.4fr 1.1fr 1.6fr; gap:12px; padding:13px 22px; border-bottom:1px solid #eceff2; border-left:4px solid {{ row.bar }}; background:{{ row.bg }}; font-size:14px; align-items:center; cursor:pointer;">
+            <span style="font-weight:900;">{{ row.kind }}</span>
+            <span style="color:#1b2126;">{{ row.use }}</span>
+            <span style="font-family:'IBM Plex Mono'; font-size:12.5px; font-weight:600; color:#0a63a8;">{{ row.part }}</span>
+            <span style="color:#5a626a; font-size:13px;">{{ row.also }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+    <div style="font-size:12.5px; color:#6b7480; margin-top:12px;">Click a row to view that kit type. Rows marked “verify application” should be confirmed with your dealer before ordering.</div>
+  </div>
+
+  <div id="faq" style="padding:52px 40px; border-top:1px solid #e1e3e5;">
+    <div style="font-family:'Shippori Mincho'; font-weight:600; font-size:13px; letter-spacing:0.22em; color:#eb0028; margin-bottom:8px;">よくある質問 · FAQ</div>
+    <div style="display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:10px 20px; margin:0 0 28px;"><h2 style="font-weight:900; font-size:30px; margin:0;">{{ brandLabel }} questions</h2><a href="SumoGears FAQ.dc.html" style="font-weight:700; font-size:14px;">All FAQs →</a></div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 440px), 1fr)); gap:40px;">
+      <sc-for list="{{ faqGroups }}" as="g" hint-placeholder-count="2">
+        <div>
+          <div style="display:flex; align-items:center; gap:12px; padding-bottom:12px; border-bottom:3px solid {{ g.color }};">
+            <span style="font-weight:900; font-size:18px;">{{ g.title }}</span>
+            <span style="font-family:'IBM Plex Mono'; font-size:10.5px; letter-spacing:0.1em; color:#6b7480;">{{ g.count }}</span>
+          </div>
+          <sc-for list="{{ g.items }}" as="q" hint-placeholder-count="5">
+            <div style="border-bottom:1px solid #e1e3e5;">
+              <div onClick="{{ q.toggle }}" style="display:flex; justify-content:space-between; align-items:center; gap:16px; padding:16px 0; cursor:pointer; font-weight:700; font-size:15.5px;">
+                <span>{{ q.q }}</span><span style="flex:0 0 26px; height:26px; display:flex; align-items:center; justify-content:center; background:{{ q.iconBg }}; color:{{ q.iconFg }}; font-size:16px; border-radius:2px;">{{ q.icon }}</span>
+              </div>
+              <sc-if value="{{ q.open }}" hint-placeholder-val="{{ false }}">
+                <div style="padding:0 40px 18px 0; font-size:14.5px; line-height:1.7; color:#5a626a; text-wrap:pretty;">{{ q.a }}<sc-if value="{{ q.link }}" hint-placeholder-val="{{ false }}"> <a href="SumoGears Dealer-Event Map v2.html" style="font-weight:700;">Find a dealer →</a></sc-if></div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:1px; background:#e1e3e5; border-top:1px solid #e1e3e5;">
+    <div style="background:#fff; padding:36px 40px; border-top:4px solid #0686db;"><div style="font-weight:900; font-size:28px; color:#0686db;">O.E. parts</div><div style="font-size:14px; color:#5a626a; line-height:1.6; margin-top:6px;">In most cases the exact bearings, seals and gaskets used in factory production.</div></div>
+    <div style="background:#fff; padding:36px 40px; border-top:4px solid #0686db;"><div style="font-weight:900; font-size:28px; color:#0686db;">Japanese only</div><div style="font-size:14px; color:#5a626a; line-height:1.6; margin-top:6px;">Where the exact supplier isn't available, we substitute only Japanese-made components.</div></div>
+    <div style="background:#fff; padding:36px 40px; border-top:4px solid #eb0028;"><div style="font-weight:900; font-size:28px; color:#eb0028;">Like new</div><div style="font-size:14px; color:#5a626a; line-height:1.6; margin-top:6px;">The same quiet operation, fitment and long life you'd expect from a new vehicle.</div></div>
+  </div>
+
+  <div style="background:#0f2f57; padding:24px 40px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px; color:#fff;">
+    <div style="font-family:'Shippori Mincho'; font-weight:600; font-size:12px; letter-spacing:0.22em; color:#5eb4ec;">OTHER {{ brandUpper }} PLATFORMS</div>
+    <div style="display:flex; flex-wrap:wrap; gap:28px; font-weight:700; font-size:15px;">
+      <sc-for list="{{ others }}" as="o" hint-placeholder-count="3">
+        <span onClick="{{ o.select }}" style="cursor:pointer;" style-hover="color:#5eb4ec;">{{ o.label }} →</span>
+      </sc-for>
+    </div>
+  </div>
+
+  <div style="background:#fff; padding:36px 40px 26px; border-top:3px solid #0686db;">
+    <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:32px; margin-bottom:24px;">
+      <div style="max-width:320px;"><div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;"><img src="assets/sumo-logo.svg" alt="Sumo Gears" style="width:52px; height:52px; display:block; object-fit:contain;"><div style="font-weight:900; font-size:20px; letter-spacing:0.02em; color:#0f2f57;">SUMO <span style="color:#eb0028;">GEARS</span></div></div><div style="font-size:13.5px; color:#8a9097; line-height:1.6;">日本製 · Japan OE-grade drivetrain. An AAIE company.</div></div>
+      <div style="display:flex; flex-wrap:wrap; gap:56px; font-size:13.5px; color:#5a626a;">
+        <div><div style="font-family:'Shippori Mincho'; font-size:11px; color:#0a63a8; letter-spacing:0.14em; margin-bottom:12px;">PRODUCTS</div><div style="display:flex; flex-direction:column; gap:8px;"><a href="SumoGears Product Page v2 - LC 60-70.dc.html" style="color:#5a626a;">Toyota Gear Sets</a><span>Suzuki Gear Sets</span><span style="color:#0a63a8; font-weight:700;">Rebuild Kits</span></div></div>
+        <div><div style="font-family:'Shippori Mincho'; font-size:11px; color:#0a63a8; letter-spacing:0.14em; margin-bottom:12px;">COMPANY</div><div style="display:flex; flex-direction:column; gap:8px;"><span>About Us</span><span>Community</span><a href="SumoGears Dealer-Event Map v2.html" style="color:#5a626a;">Events</a></div></div>
+        <div><div style="font-family:'Shippori Mincho'; font-size:11px; color:#0a63a8; letter-spacing:0.14em; margin-bottom:12px;">SUPPORT</div><div style="display:flex; flex-direction:column; gap:8px;"><a href="SumoGears Dealer-Event Map v2.html" style="color:#5a626a;">Find a Dealer</a><a href="SumoGears FAQ.dc.html" style="color:#5a626a;">FAQs</a><a href="SumoGears Contact.dc.html" style="color:#5a626a;">Contact Us</a><span>Store</span></div></div>
+      </div>
+    </div>
+    <div style="border-top:1px solid #e1e3e5; padding-top:16px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px; font-size:11.5px; color:#9aa0a6;"><span>© 2026 Sumo Gears · All Automotive Import Export</span><span style="font-family:'Shippori Mincho'; letter-spacing:0.1em; color:#0a63a8;">Japanese Made. Trail Proven.</span></div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;defaultBrand&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;toyota&quot;,&quot;suzuki&quot;],&quot;default&quot;:&quot;toyota&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+const U = 'https://www.sumogearco.com/wp-content/uploads/';
+const CATS = {
+  tcase: { tab: 'T-CASE', short: 'TRANSFER', kind: 'Transfer Case', name: 'Transfer Case Rebuild Kit', also: 'Shafts, flanges, gears' },
+  knuckle: { tab: 'KNUCKLE', short: 'STEERING', kind: 'Knuckle', name: 'Knuckle Rebuild Kit' },
+  wheel: { tab: 'WHEEL', short: 'FRONT + REAR', kind: 'Front and Rear Wheel', name: 'Wheel Bearing Kit' },
+  mt: { tab: 'M/T', short: 'MANUAL TRANS', kind: 'Manual Transmission', name: 'Manual Transmission Rebuild Kit', also: 'Input & main shafts, counter gear' },
+  diff: { tab: 'DIFF', short: 'DIFFERENTIAL', kind: 'Differential', name: 'Differential Rebuild Kit', also: 'Differential flanges' },
+};
+const K = (use, part, verify) => ({ use, part, verify: !!verify });
+const DATA = {
+  toyota: { label: 'Toyota', faq: 'toyota', platforms: [
+    { id: 'lc40', label: '4# / 55', title: 'Toyota Land Cruiser 4# / 55', short: 'Land Cruiser 4# / 55', cats: [
+      ['tcase', '2017/09/TBKL2.3.h.jpg', [K('Main kit, 3/69–7/80', 'TBKL2/3'), K('Subkit with 3-speed transmission', 'SUBKIT-TBKL2'), K('Subkit with 4-speed transmission', 'SUBKIT-TBKL3')]],
+      ['knuckle', '2017/09/SBKL3.h.jpg', [K('Drum brakes, 3/69–1/74', 'SBKL2'), K('Disc brakes, 1/75–84', 'SBKL3')], 'Koyo 16 roller'],
+      ['wheel', '2017/09/WBKL11.1.W.jpg', [K('Rear wheel, 3/69–9/73', 'WBKL10'), K('Rear wheel semi-float, 9/73–84', 'WBKL11'), K('Rear wheel full-float', 'WBKL2'), K('Front wheel drum, 3/69–1/74', 'WBKL1'), K('Front wheel disc, 1/74–84', 'WBKL2')]],
+      ['mt', null, [K('4-speed (H42), 1/74–84', 'GBKL2'), K('5-speed (H55F), 10/82–84', 'GBKL3')]],
+      ['diff', null, [K('Front and rear, without crush sleeve', 'DBKL1'), K('Front and rear, with crush sleeve', 'DBKL2')]],
+    ] },
+    { id: 'lc60', label: '60 / 62 / 7#', title: 'Toyota Land Cruiser 60 / 62 / 7#', short: 'Land Cruiser 60 / 62 / 7#', cats: [
+      ['tcase', '2017/09/TBKL4.5.h.jpg', [K('Main kit, split transfer case', 'TBKL4/5'), K('Subkit with 34mm idler shaft', 'SUBKIT-TBKL4'), K('Subkit with 38mm idler shaft', 'SUBKIT-TBKL5')]],
+      ['knuckle', '2017/09/SBKL3.h-1.jpg', [K('60 / 62, 1/80–1/90', 'SBKL3'), K('7# series', 'SBKL4', 1)], 'Koyo 16 roller'],
+      ['wheel', '2017/09/WBKL2.h.jpg', [K('Rear wheel semi-float, 1/80–1/90', 'WBKL11'), K('Rear wheel full-float', 'WBKL2'), K('Front wheel disc, 1/80–1/90', 'WBKL2')]],
+      ['mt', null, [K('4-speed (H42), 1/80–8/87', 'GBKL2'), K('5-speed (H55F), 10/82–10/85', 'GBKL3'), K('5-speed (H55F), 10/85 on', 'GBKL4')]],
+      ['diff', null, [K('Front and rear 9.5″, 60 / 62', 'DBKL2'), K('Front and rear 9.5″, 7#', 'DBKL2', 1), K('Front 8″, 7#', 'DBKL4', 1)]],
+    ] },
+    { id: 'lc80', label: '80 / 100', title: 'Toyota Land Cruiser 8# / 100 / 105', short: 'Land Cruiser 8# / 100 / 105', cats: [
+      ['tcase', null, [K('Part-time transfer case, 8#', 'TBKL6'), K('Full-time transfer case, 8# / 100 / 105', 'TBKL7')]],
+      ['knuckle', '2017/09/SBKL5.h2.jpg', [K('8# / 105', 'SBKL5')], 'Koyo O.E. bearing'],
+      ['wheel', '2017/09/WBKL7.h-1.jpg', [K('Rear wheel semi-float, 1/90–1/95, 8#', 'WBKL11'), K('Rear wheel full-float, 1/90–1/98, 8# / 105', 'WBKL5'), K('Front wheel, 1/90–1/98, 8# / 105', 'WBKL7')]],
+      ['mt', null, [K('5-speed (H115F), 1/90–1/92, 8#', 'GBKL6'), K('5-speed (H155F), 1/92–1/98, 8#', 'GBKL7')]],
+      ['diff', null, [K('Rear 9.5″ without locker, 8# / 100 / 105', 'DBKL3'), K('Rear 9.5″ with locker, 8# / 100 / 105', 'DBKL6'), K('Front 8″ without locker, 8# / 105', 'DBKL4'), K('Front 8″ with locker, 8# / 105', 'DBKL8')]],
+    ] },
+    { id: 'hilux', label: '4Runner / Pickup', title: 'Toyota 4Runner / Pickup', short: '4Runner / Pickup', cats: [
+      ['tcase', '2017/09/TBKH1.h2.jpg', [K('Main kit, RF1A', 'TBKH1'), K('Needle bearing kit, RF1A', 'TBKH1-MAJ')]],
+      ['knuckle', '2017/09/SBKL3.h.jpg', [K('Solid axle', 'SBKL3')], 'Koyo 16 roller'],
+      ['wheel', '2017/09/WBKH1.h.jpg', [K('Rear wheel semi-float', 'WBKH1'), K('Front wheel, solid axle', 'WBKL2')]],
+      ['diff', '2017/09/DBKH1.1.W.jpg', [K('Front and rear 8″, no crush sleeve', 'DBKH1'), K('V-6 8″', 'DBKL4')]],
+    ] },
+  ] },
+  suzuki: { label: 'Suzuki', faq: 'suzuki', platforms: [
+    { id: 'samurai', label: 'Samurai SJ413', title: 'Suzuki Samurai SJ413', short: 'Samurai SJ413', cats: [
+      ['diff', '2024/01/DBKS1.W.jpg', [K('Front and rear', 'DBKS1')], null, 'Differential flanges, side gears'],
+      ['tcase', '2024/01/TBKS1.W.jpg', [K('Complete rebuild kit', 'TBKS1'), K('For use with a Sumo Gear kit', 'TBKS1-GK')]],
+      ['mt', '2024/01/GBKS1.WS_.2.jpg', [K('5-speed', 'GBKS1-WS')]],
+      ['wheel', '2024/01/WBKS1.h.jpg', [K('Rear wheel', 'WBKS1'), K('Front wheel bearing', '09265-41001')]],
+      ['knuckle', '2024/01/SBKS1.1.jpg', [K('Knuckle kit', 'SBKS1')]],
+    ] },
+    { id: 'jimny-pa', label: 'Jimny · Push Button A/T', title: 'Suzuki Jimny · Push Button T/C', sub: 'Automatic Transmission', short: 'Jimny push button A/T', dev: ['diff', 'tcase', 'wheel'] },
+    { id: 'jimny-pm', label: 'Jimny · Push Button M/T', title: 'Suzuki Jimny · Push Button T/C', sub: 'Manual Transmission', short: 'Jimny push button M/T', dev: ['diff', 'tcase', 'mt', 'wheel'] },
+    { id: 'jimny-ms', label: 'Jimny · Manual T/C', title: 'Suzuki Jimny · Manually Shifted T/C', short: 'Jimny manual T/C', dev: ['diff', 'tcase', 'mt', 'wheel'] },
+    { id: 'vitara', label: 'Vitara / Sidekick', title: 'Suzuki Vitara / Sidekick', short: 'Vitara / Sidekick', dev: ['diff', 'tcase', 'mt', 'wheel'] },
+  ] },
+};
+
+class Component extends DCLogic {
+  state = { brand: this.props.defaultBrand ?? 'toyota', p: 1, c: 0, faq: {} };
+  componentDidMount() {
+    const h = location.hash.slice(1);
+    for (const b of Object.keys(DATA)) { const i = DATA[b].platforms.findIndex(p => p.id === h); if (i >= 0 || h === b) this.setState({ brand: b, p: Math.max(i, 0), c: 0 }); }
+    if (!window.SUMO_FAQ) this._ft = setInterval(() => { if (window.SUMO_FAQ) { clearInterval(this._ft); this.forceUpdate(); } }, 100);
+  }
+  componentWillUnmount() { clearInterval(this._ft); }
+  platCats(brand, pl) {
+    const B = DATA[brand].label;
+    const desc = kind => `Assembled with components from the same manufacturers who supply ${B}. In most cases we use the exact bearings, seals and gaskets used in ${B} production, so you can expect the same quiet operation, proper fitment and long life as a new vehicle. Where we can't use the exact supplier, we substitute only Japanese-made components.`;
+    const list = pl.cats ? pl.cats.map(([id, img, kits, bearing, also]) => ({ id, img: img ? U + img : null, kits, bearing, alsoOverride: also }))
+      : pl.dev.map(id => ({ id, img: null, kits: [] }));
+    return list.map(x => {
+      const C = CATS[x.id]; const has = x.kits.length > 0; const also = x.alsoOverride || C.also || '';
+      return { ...C, ...x, desc: has ? desc(C.kind) : `${C.name} for this platform is under development.`, kindUpper: C.kind.toUpperCase(),
+        hasImg: !!x.img, noImg: !x.img, pending: has ? 'PRODUCT PHOTO PENDING' : 'KIT IN DEVELOPMENT',
+        hasKits: has, noKits: !has, also, hasAlso: has && !!also, hasNote: !!x.bearing, noteLabel: 'Knuckle bearings', note: x.bearing || '' };
+    });
+  }
+  renderVals() {
+    const { brand, p, c } = this.state;
+    const D = DATA[brand]; const pl = D.platforms[p] || D.platforms[0];
+    const cats = this.platCats(brand, pl); const ci = Math.min(c, cats.length - 1); const cat = cats[ci];
+    const setP = i => () => { this.setState({ p: i, c: 0 }); window.scrollTo({ top: 0, behavior: 'smooth' }); };
+    const rows = cats.flatMap((x, i) => (x.kits.length ? x.kits : [{ use: 'Kit in development', part: '—' }]).map(k => ({
+      kind: x.tab, use: k.use + (k.verify ? ' · verify application' : ''), part: k.part, also: x.also || '—',
+      bg: i === ci ? '#fdf2f4' : '#fff', bar: i === ci ? '#eb0028' : 'transparent', select: () => { this.setState({ c: i }); window.scrollTo({ top: 0, behavior: 'smooth' }); } })));
+    const nKits = cats.reduce((n, x) => n + x.kits.length, 0);
+    return {
+      brands: Object.keys(DATA).map(b => ({ label: DATA[b].label.toUpperCase(), bg: b === brand ? '#0f2f57' : '#fff', fg: b === brand ? '#fff' : '#3c444c', select: () => this.setState({ brand: b, p: 0, c: 0 }) })),
+      brandUpper: D.label.toUpperCase(), brandLabel: D.label + ' rebuild kit',
+      plat: { ...pl, title: pl.title + (pl.sub ? ' · ' + pl.sub : ''), crumb: pl.short.toUpperCase(), shortUpper: pl.short.toUpperCase() },
+      series: D.platforms.map((x, i) => ({ label: x.label, bg: i === p ? '#0686db' : '#fff', fg: i === p ? '#fff' : '#3c444c', select: setP(i) })),
+      cat: { ...cat, caption: (cat.kits[0] ? cat.kits[0].part + ' · ' : '') + cat.name.toUpperCase(), pos: `${ci + 1} / ${cats.length}` },
+      prev: () => this.setState({ c: (ci - 1 + cats.length) % cats.length }), next: () => this.setState({ c: (ci + 1) % cats.length }),
+      thumbs: cats.map((x, i) => ({ ...x, border: i === ci ? '#0686db' : 'transparent', select: () => this.setState({ c: i }) })),
+      catTabs: cats.map((x, i) => ({ ...x, bg: i === ci ? '#0f2f57' : '#fff', fg: i === ci ? '#fff' : '#1b2126', bar: i === ci ? '#eb0028' : 'transparent', select: () => this.setState({ c: i }) })),
+      rows, kitCount: nKits ? `${nKits} KITS · ${cats.length} TYPES` : 'KITS IN DEVELOPMENT',
+      others: D.platforms.map((x, i) => ({ label: x.short, i, select: setP(i) })).filter(o => o.i !== p),
+      faqGroups: ['general', D.faq].map(id => (window.SUMO_FAQ || []).find(g => g.id === id)).filter(Boolean).map((grp, gi) => ({ ...grp, count: `${grp.items.length} QUESTIONS`, items: grp.items.map((q, qi) => {
+        const id = gi + '-' + qi; const open = !!this.state.faq[id];
+        return { ...q, link: !!q.link, open, icon: open ? '−' : '+', iconBg: open ? '#0f2f57' : '#eef1f4', iconFg: open ? '#fff' : '#0f2f57',
+          toggle: () => this.setState(s => ({ faq: { ...s.faq, [id]: !open } })) };
+      }) })),
+    };
+  }
+}
+</script>
+</body>
+</html>

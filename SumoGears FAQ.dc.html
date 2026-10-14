@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="./faq-data.js"></script>
+<style>
+* { box-sizing: border-box; }
+body { margin: 0; background: #e4e7ea; }
+a { color: #0686db; text-decoration: none; }
+a:hover { color: #eb0028; }
+input:focus { outline: 2px solid #0686db; outline-offset: -2px; }
+</style>
+</helmet>
+<template id="__bundler_thumbnail" data-bg-color="#0f2f57"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#0f2f57"/><text x="50" y="66" font-family="sans-serif" font-weight="900" font-size="48" fill="#fff" text-anchor="middle">?</text></svg></template>
+
+<div data-screen-label="FAQ" style="max-width:1440px; margin:0 auto; background:#fff; font-family:'Zen Kaku Gothic New', sans-serif; color:#1b2126;">
+
+  <div style="min-height:64px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:14px 28px; padding:10px 40px; background:#fff; border-bottom:3px solid #0686db;">
+    <a href="SumoGears Homepage.dc.html" style="display:flex; align-items:center; gap:12px;">
+      <img src="assets/sumo-logo.svg" alt="Sumo Gears" style="width:52px; height:52px; display:block; object-fit:contain;">
+      <div style="line-height:1;"><div style="font-weight:900; font-size:21px; letter-spacing:0.02em; color:#0f2f57;">SUMO <span style="color:#eb0028;">GEARS</span></div><div style="font-family:'Shippori Mincho'; font-weight:600; font-size:9.5px; letter-spacing:0.26em; color:#0a63a8; margin-top:3px;">日本製 · MADE IN JAPAN</div></div>
+    </a>
+    <div style="display:flex; flex-wrap:wrap; align-items:center; gap:26px; font-weight:500; font-size:14px; color:#3c444c;">
+      <a href="SumoGears Product Page v2 - LC 60-70.dc.html" style="color:#3c444c;">Low Range Gear Sets</a><a href="SumoGears Rebuild Kits.dc.html" style="color:#3c444c;">Rebuild Kits</a><span>Community</span><a href="SumoGears Dealer-Event Map v2.html" style="color:#3c444c;">Dealers &amp; Events</a><span>About</span>
+    </div>
+    <div style="display:flex; align-items:center; gap:16px; font-size:13px; color:#5a626a;">
+      <span style="color:#0a63a8; font-weight:700;">FAQs</span><span>Contact</span>
+      <a href="SumoGears Dealer-Event Map v2.html" style="background:#eb0028; color:#fff; font-weight:700; font-size:13.5px; padding:9px 16px; border-radius:2px;">Find a Dealer</a>
+    </div>
+  </div>
+
+  <div style="background:#0f2f57; padding:36px 40px 30px; color:#fff;">
+    <div style="font-family:'Shippori Mincho'; font-weight:600; font-size:13px; letter-spacing:0.26em; color:#5eb4ec; margin-bottom:12px;">よくある質問 · FAQ</div>
+    <h1 style="font-weight:900; font-size:36px; line-height:1.1; margin:0 0 18px;">Questions about Sumo Gears</h1>
+    <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center;">
+      <input value="{{ q }}" onChange="{{ onQ }}" placeholder="Search questions, e.g. transfer case, material, Suzuki" style="flex:1 1 320px; max-width:620px; font-family:'Zen Kaku Gothic New', sans-serif; font-size:15px; padding:13px 16px; border:0; border-radius:2px; color:#1b2126;">
+      <span style="font-family:'IBM Plex Mono'; font-size:11px; letter-spacing:0.12em; color:#9dc2e4;">{{ countLabel }}</span>
+    </div>
+  </div>
+
+  <div style="display:flex; flex-wrap:wrap; gap:1px; background:#d7dbdf; border-bottom:1px solid #d7dbdf;">
+    <sc-for list="{{ chips }}" as="c" hint-placeholder-count="5">
+      <div onClick="{{ c.pick }}" style="flex:1 1 150px; background:{{ c.bg }}; padding:14px 18px; color:{{ c.fg }}; border-top:3px solid {{ c.color }}; cursor:pointer;">
+        <div style="font-weight:700; font-size:14px; line-height:1.2;">{{ c.title }}</div>
+        <div style="font-family:'IBM Plex Mono'; font-size:10px; letter-spacing:0.1em; margin-top:4px; opacity:0.75;">{{ c.count }}</div>
+      </div>
+    </sc-for>
+  </div>
+
+  <div style="padding:36px 40px 56px; display:flex; flex-direction:column; gap:40px; max-width:1040px;">
+    <sc-for list="{{ groups }}" as="g" hint-placeholder-count="3">
+      <div>
+        <div style="display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:8px 16px; padding-bottom:12px; border-bottom:3px solid {{ g.color }};">
+          <div style="display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 14px;">
+            <sc-if value="{{ g.hasCrumb }}" hint-placeholder-val="{{ false }}"><span style="font-family:'IBM Plex Mono'; font-size:10.5px; letter-spacing:0.1em; color:#6b7480;">{{ g.crumb }}</span></sc-if>
+            <h2 style="font-weight:900; font-size:24px; margin:0;">{{ g.title }}</h2>
+            <span style="font-family:'IBM Plex Mono'; font-size:10.5px; letter-spacing:0.1em; color:#6b7480;">{{ g.count }}</span>
+          </div>
+          <sc-if value="{{ g.hasPage }}" hint-placeholder-val="{{ false }}">
+            <a href="{{ g.page }}" style="font-weight:700; font-size:13.5px;">View {{ g.short }} kits →</a>
+          </sc-if>
+        </div>
+        <sc-for list="{{ g.items }}" as="it" hint-placeholder-count="4">
+          <div data-anchor="{{ it.anchorId }}" style="border-bottom:1px solid #e1e3e5;">
+            <div onClick="{{ it.toggle }}" style="display:flex; justify-content:space-between; align-items:center; gap:16px; padding:17px 0; cursor:pointer; font-weight:700; font-size:16px;">
+              <span>{{ it.q }}</span>
+              <span style="flex:0 0 28px; height:28px; display:flex; align-items:center; justify-content:center; background:{{ it.iconBg }}; color:{{ it.iconFg }}; font-size:17px; border-radius:2px;">{{ it.icon }}</span>
+            </div>
+            <sc-if value="{{ it.open }}" hint-placeholder-val="{{ false }}">
+              <div style="padding:0 48px 20px 0; font-size:15px; line-height:1.7; color:#5a626a; text-wrap:pretty;">{{ it.a }}<sc-if value="{{ it.link }}" hint-placeholder-val="{{ false }}"> <a href="SumoGears Dealer-Event Map v2.html" style="font-weight:700;">Find a dealer →</a></sc-if></div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </sc-for>
+    <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+      <div style="font-size:15px; color:#5a626a;">No questions match that search. Try another word, or contact us.</div>
+    </sc-if>
+  </div>
+
+  <div style="background:#f2f3f4; border-top:1px solid #e1e3e5; padding:32px 40px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:20px;">
+    <div>
+      <div style="font-weight:900; font-size:22px;">Still have a question?</div>
+      <div style="font-size:14.5px; color:#5a626a; margin-top:4px;">An authorized Sumo Gears dealer can help you choose the right kit for your vehicle.</div>
+    </div>
+    <div style="display:flex; flex-wrap:wrap; gap:10px;">
+      <a href="SumoGears Dealer-Event Map v2.html" style="background:#eb0028; color:#fff; font-weight:700; font-size:14.5px; padding:13px 24px; border-radius:2px;">Find a Dealer</a>
+      <span style="border:2px solid #0a63a8; color:#0a63a8; font-weight:700; font-size:14.5px; padding:11px 22px; border-radius:2px;">Contact Us</span>
+    </div>
+  </div>
+
+  <div style="background:#fff; padding:36px 40px 26px; border-top:3px solid #0686db;">
+    <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:32px; margin-bottom:24px;">
+      <div style="max-width:320px;"><div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;"><img src="assets/sumo-logo.svg" alt="Sumo Gears" style="width:52px; height:52px; display:block; object-fit:contain;"><div style="font-weight:900; font-size:20px; letter-spacing:0.02em; color:#0f2f57;">SUMO <span style="color:#eb0028;">GEARS</span></div></div><div style="font-size:13.5px; color:#8a9097; line-height:1.6;">日本製 · Japan OE-grade drivetrain. An AAIE company.</div></div>
+      <div style="display:flex; flex-wrap:wrap; gap:56px; font-size:13.5px; color:#5a626a;">
+        <div><div style="font-family:'Shippori Mincho'; font-size:11px; color:#0a63a8; letter-spacing:0.14em; margin-bottom:12px;">PRODUCTS</div><div style="display:flex; flex-direction:column; gap:8px;"><a href="SumoGears Product Page v2 - LC 60-70.dc.html" style="color:#5a626a;">Toyota Gear Sets</a><span>Suzuki Gear Sets</span><a href="SumoGears Rebuild Kits.dc.html" style="color:#3c444c;">Rebuild Kits</a></div></div>
+        <div><div style="font-family:'Shippori Mincho'; font-size:11px; color:#0a63a8; letter-spacing:0.14em; margin-bottom:12px;">COMPANY</div><div style="display:flex; flex-direction:column; gap:8px;"><span>About Us</span><span>Community</span><a href="SumoGears Dealer-Event Map v2.html" style="color:#5a626a;">Events</a></div></div>
+        <div><div style="font-family:'Shippori Mincho'; font-size:11px; color:#0a63a8; letter-spacing:0.14em; margin-bottom:12px;">SUPPORT</div><div style="display:flex; flex-direction:column; gap:8px;"><a href="SumoGears Dealer-Event Map v2.html" style="color:#5a626a;">Find a Dealer</a><span style="color:#0a63a8; font-weight:700;">FAQs</span><span>Contact Us</span></div></div>
+      </div>
+    </div>
+    <div style="border-top:1px solid #e1e3e5; padding-top:16px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px; font-size:11.5px; color:#9aa0a6;"><span>© 2026 Sumo Gears · All Automotive Import Export</span><span style="font-family:'Shippori Mincho'; letter-spacing:0.1em; color:#0a63a8;">Japanese Made. Trail Proven.</span></div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { q: '', cat: 'all', open: {} };
+  componentDidMount() {
+    this._t = setInterval(() => { if (window.SUMO_FAQ) { clearInterval(this._t); this.applyHash(); } }, 50);
+  }
+  applyHash() {
+    const h = decodeURIComponent((location.hash || '').slice(1));
+    const data = window.SUMO_FAQ || [];
+    if (!h) { this.forceUpdate(); return; }
+    const g = data.find(x => x.id === h);
+    if (g) { this.setState({ cat: g.parent || g.id }); return; }
+    for (const grp of data) {
+      const it = grp.items.find(i => i.anchor === h);
+      if (it) { this.setState(s => ({ cat: grp.parent || grp.id, open: { ...s.open, [grp.id + '|' + it.q]: true } })); setTimeout(() => { const el = document.querySelector('[data-anchor="faq-' + h + '"]'); if (el) window.scrollTo(0, el.getBoundingClientRect().top + window.pageYOffset - 16); }, 400); return; }
+    }
+    this.forceUpdate();
+  }
+  componentWillUnmount() { clearInterval(this._t); }
+  renderVals() {
+    const data = window.SUMO_FAQ || [];
+    const { q, cat, open } = this.state;
+    const needle = q.trim().toLowerCase();
+    const byId = Object.fromEntries(data.map(g => [g.id, g]));
+    const inCat = g => cat === 'all' || g.id === cat || g.parent === cat;
+    let total = 0;
+    const groups = data.filter(inCat).map(g => {
+      const items = g.items.filter(it => !needle || (it.q + ' ' + it.a).toLowerCase().includes(needle)).map(it => {
+        const id = g.id + '|' + it.q; const o = needle ? true : !!open[id];
+        return { ...it, anchorId: 'faq-' + (it.anchor || (g.id + '-' + g.items.indexOf(it))), link: !!it.link, open: o, icon: o ? '\u2212' : '+', iconBg: o ? '#0f2f57' : '#eef1f4', iconFg: o ? '#fff' : '#0f2f57',
+          toggle: () => this.setState(s => ({ open: { ...s.open, [id]: !o } })) };
+      });
+      total += items.length;
+      return { ...g, items, count: `${items.length} QUESTION${items.length === 1 ? '' : 'S'}`, crumb: g.parent ? byId[g.parent].title.toUpperCase() + ' /' : '', hasCrumb: !!g.parent, hasPage: !!g.page };
+    }).filter(g => g.items.length);
+    const top = data.filter(g => !g.parent);
+    const chips = [{ id: 'all', title: 'All questions', color: '#9aa0a6', n: data.reduce((a, g) => a + g.items.length, 0) },
+      ...top.map(g => ({ id: g.id, title: g.title, color: g.color, n: data.filter(x => x.id === g.id || x.parent === g.id).reduce((a, x) => a + x.items.length, 0) }))]
+      .map(c => ({ ...c, count: `${c.n} QUESTIONS`, bg: cat === c.id ? '#0f2f57' : '#fff', fg: cat === c.id ? '#fff' : '#1b2126',
+        pick: () => { this.setState({ cat: c.id }); try { history.replaceState(null, '', c.id === 'all' ? location.pathname : '#' + c.id); } catch (e) {} } }));
+    return { q, onQ: e => this.setState({ q: e.target.value, cat: e.target.value ? 'all' : this.state.cat }), groups, chips, empty: groups.length === 0 && data.length > 0,
+      countLabel: needle ? `${total} MATCH${total === 1 ? '' : 'ES'}` : '' };
+  }
+}
+</script>
+</body>
+</html>

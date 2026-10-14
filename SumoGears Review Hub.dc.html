@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; }
+body { margin: 0; background: #eef1f4; }
+a { color: #0686db; text-decoration: none; }
+a:hover { color: #eb0028; }
+textarea:focus { outline: 2px solid #0686db; outline-offset: -2px; }
+</style>
+</helmet>
+<template id="__bundler_thumbnail" data-bg-color="#0f2f57"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#0f2f57"/><rect x="30" y="30" width="40" height="8" fill="#0686db"/><rect x="30" y="46" width="40" height="8" fill="#fff"/><rect x="30" y="62" width="24" height="8" fill="#eb0028"/></svg></template>
+
+<div data-screen-label="Review Hub" style="max-width:1280px; margin:0 auto; padding:40px 32px 56px; font-family:'Zen Kaku Gothic New', sans-serif; color:#1b2126;">
+
+  <div style="display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:20px; padding-bottom:24px; border-bottom:3px solid #0686db; margin-bottom:28px;">
+    <div style="display:flex; align-items:center; gap:16px;">
+      <img src="assets/sumo-logo.svg" alt="Sumo Gears" style="width:60px; height:60px; object-fit:contain; display:block;">
+      <div>
+        <div style="font-family:'IBM Plex Mono'; font-size:11px; letter-spacing:0.16em; color:#6b7480; margin-bottom:6px;">DESIGN REVIEW · ROUND 2 · OCT 2026</div>
+        <h1 style="font-weight:900; font-size:34px; line-height:1.1; margin:0; color:#0f2f57;">Sumo <span style="color:#eb0028;">Gears</span> website walkthrough</h1>
+      </div>
+    </div>
+    <div style="display:flex; flex-wrap:wrap; gap:10px;">
+      <div onClick="{{ copyAll }}" style="background:#0f2f57; color:#fff; font-weight:700; font-size:14px; padding:12px 20px; border-radius:2px; cursor:pointer;">{{ copyLabel }}</div>
+      <div onClick="{{ downloadAll }}" style="border:2px solid #0f2f57; color:#0f2f57; font-weight:700; font-size:14px; padding:10px 18px; border-radius:2px; cursor:pointer;">Download notes (.txt)</div>
+    </div>
+  </div>
+
+  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 190px),1fr)); gap:1px; background:#d7dbdf; border:1px solid #d7dbdf; margin-bottom:28px;">
+    <div style="background:#fff; padding:18px 20px;"><div style="font-family:'IBM Plex Mono'; font-size:10.5px; letter-spacing:0.14em; color:#1f8a52; margin-bottom:6px;">ALIGNED · SEP 24</div><div style="font-weight:700; font-size:14.5px; line-height:1.45;">Navy + bright blue palette, exact-fit vehicle picker</div></div>
+    <div style="background:#fff; padding:18px 20px;"><div style="font-family:'IBM Plex Mono'; font-size:10.5px; letter-spacing:0.14em; color:#1f8a52; margin-bottom:6px;">ALIGNED · SEP 24</div><div style="font-weight:700; font-size:14.5px; line-height:1.45;">Website first: SEO and AI-search visibility</div></div>
+    <div style="background:#fff; padding:18px 20px;"><div style="font-family:'IBM Plex Mono'; font-size:10.5px; letter-spacing:0.14em; color:#0a63a8; margin-bottom:6px;">SITE MODEL</div><div style="font-weight:700; font-size:14.5px; line-height:1.45;">Distributor directory + store.sumogears.com, no live inventory</div></div>
+    <div style="background:#fff; padding:18px 20px;"><div style="font-family:'IBM Plex Mono'; font-size:10.5px; letter-spacing:0.14em; color:#e07a00; margin-bottom:6px;">PENDING</div><div style="font-weight:700; font-size:14.5px; line-height:1.45;">Stock photos from wp-admin, logo “S” + brand font</div></div>
+  </div>
+
+  <div style="display:flex; flex-direction:column; gap:20px;">
+    <sc-for list="{{ pages }}" as="p" hint-placeholder-count="3">
+      <div style="background:#fff; border:1px solid #dfe4e9; border-top:4px solid {{ p.accent }}; display:grid; grid-template-columns:repeat(auto-fit, minmax(340px,1fr));">
+        <div style="padding:26px 28px; border-right:1px solid #eceff2;">
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:10px;">
+            <div style="width:34px; height:34px; background:#0f2f57; color:#fff; font-weight:900; font-size:16px; display:flex; align-items:center; justify-content:center; border-radius:2px;">{{ p.n }}</div>
+            <h2 style="font-weight:900; font-size:24px; margin:0;">{{ p.title }}</h2>
+          </div>
+          <div style="font-size:14px; color:#5a626a; line-height:1.6; margin-bottom:16px;">{{ p.sub }}</div>
+          <div style="font-family:'IBM Plex Mono'; font-size:10.5px; letter-spacing:0.14em; color:#6b7480; margin-bottom:8px;">ASK THE TEAM</div>
+          <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:20px;">
+            <sc-for list="{{ p.points }}" as="pt" hint-placeholder-count="4">
+              <div style="display:flex; gap:10px; font-size:14px; line-height:1.5;"><span style="color:{{ p.accent }}; font-weight:900;">→</span><span>{{ pt }}</span></div>
+            </sc-for>
+          </div>
+          <a href="{{ p.href }}" target="_blank" style="display:inline-flex; align-items:center; gap:10px; background:#0686db; color:#fff; font-weight:700; font-size:14.5px; padding:12px 22px; border-radius:2px;">Open {{ p.title }} ↗</a>
+        </div>
+        <div style="padding:26px 28px; background:#f7f9fb; display:flex; flex-direction:column;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <div style="font-family:'IBM Plex Mono'; font-size:10.5px; letter-spacing:0.14em; color:#6b7480;">TEAM COMMENTS</div>
+            <div style="font-family:'IBM Plex Mono'; font-size:10.5px; color:#9aa0a6;">{{ p.count }}</div>
+          </div>
+          <textarea value="{{ p.note }}" onChange="{{ p.onNote }}" placeholder="Type comments as the team reacts. One line per item. Saved automatically." style="flex:1; min-height:220px; width:100%; resize:vertical; border:1px solid #d7dbdf; border-radius:2px; padding:14px; font-family:'Zen Kaku Gothic New', sans-serif; font-size:14.5px; line-height:1.6; color:#1b2126; background:#fff;"></textarea>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+
+  <div style="margin-top:28px; background:#fff; border:1px solid #dfe4e9; padding:22px 28px;">
+    <div style="font-family:'IBM Plex Mono'; font-size:10.5px; letter-spacing:0.14em; color:#6b7480; margin-bottom:8px;">GENERAL / ACTION ITEMS</div>
+    <textarea value="{{ general }}" onChange="{{ onGeneral }}" placeholder="Decisions, owners, follow-ups." style="width:100%; min-height:120px; resize:vertical; border:1px solid #d7dbdf; border-radius:2px; padding:14px; font-family:'Zen Kaku Gothic New', sans-serif; font-size:14.5px; line-height:1.6; color:#1b2126;"></textarea>
+  </div>
+
+  <div style="margin-top:16px; font-size:12px; color:#8a9097;">Notes save in this browser only. Use Copy or Download before closing.</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  KEY = 'sumo-review-notes-v1';
+  PAGES = [
+    { id: 'home', n: '1', title: 'Homepage', href: 'SumoGears Homepage.dc.html', accent: '#0686db',
+      sub: 'Hero carousel (LC76 desert, Jimny creek), exact-fit picker, gear set and new “Refresh your ride” rebuild kit tables, community videos.',
+      points: [
+        'Hero photos: are the LC76 and Jimny shots right? A higher-res Jimny photo is still needed.',
+        '“Refresh your ride”: which rebuild kits are the real best sellers for Toyota and Suzuki?',
+        'The tables show prices, but the site is a dealer directory. Keep prices, show MSRP, or remove?',
+        'Community slots: the FJ80 axle video and Fox Bravo Overland are in. What should go in slot 3?',
+        'Are the “Proven in” partner names approved for public use?',
+      ] },
+    { id: 'product', n: '2', title: 'Gear Sets', href: 'SumoGears Product Page v2 - LC 60-70.dc.html', accent: '#0a63a8',
+      sub: 'One template for every platform. Toyota / Suzuki toggle; Suzuki covers Samurai, three Jimny variants and Vitara / Sidekick.',
+      points: [
+        'Toyota shows the LC 60 / 62 / 7# only. Should the 4# / 55, 80 / 100 and 4Runner pages be built next?',
+        'Toyota: the ring & pinion ratio picker. Suzuki: tire size + reduction %. Is that the right split?',
+        'Right-side nav order: Find a Dealer, Gear Sets, Rebuild Kits, Store - Merch, FAQ, Contact.',
+        'Which stock photos from wp-admin should replace the current product images?',
+      ] },
+    { id: 'kits', n: '3', title: 'Rebuild Kits', href: 'SumoGears Rebuild Kits.dc.html', accent: '#eb0028',
+      sub: 'Same format as gear sets. Data from the current Toyota and Suzuki rebuild kit pages; part numbers by kit type.',
+      points: [
+        'Please check part numbers and applications against the current catalog.',
+        'Jimny and Vitara kits show as “in development.” Is that still accurate?',
+        'Several Toyota kits have no product photo yet (M/T, diff, 80-series T-case).',
+        'Rows marked “verify application”: keep the wording or link to a dealer?',
+      ] },
+    { id: 'map', n: '4', title: 'Dealer & Event Map', href: 'SumoGears Dealer-Event Map v2.html', accent: '#1f8a52',
+      sub: 'Distributors and events worldwide. Tabs: All / Distributors / Events. Solid flags, no installers.',
+      points: [
+        'Toyota shoppers shouldn’t land on Suzuki-only dealers. Does the brand filter solve it?',
+        'Event calendar: which events should be listed (and are KOTH and the others confirmed)?',
+        'International focus: which South Africa / Australia distributors to target first?',
+        'Can the dealer list be exported from the backend with its Toyota / Suzuki / both tags?',
+      ] },
+    { id: 'faq', n: '5', title: 'FAQ', href: 'SumoGears FAQ.dc.html', accent: '#0686db',
+      sub: 'Shared FAQ content used on every page. General only, with no installation instructions.',
+      points: [
+        'Please verify: Suzuki kits, 4Runner 21/23 spline, DAGOR, Pine Mountain, King of the Hammers.',
+        'Any questions dealers hear often that are missing?',
+      ] },
+    { id: 'contact', n: '6', title: 'Contact', href: 'SumoGears Contact.dc.html', accent: '#eb0028',
+      sub: 'How Can We Help? (Dealer Inquiry / Event Update/Request / Product Question / Something Else), Name, Email, Country, Details.',
+      points: [
+        'Who receives each topic (dealer vs. event vs. product)?',
+        'Any extra fields needed for dealer applications?',
+      ] },
+  ];
+  state = (() => { try { return JSON.parse(localStorage.getItem('sumo-review-notes-v1')) || {}; } catch (e) { return {}; } })();
+  save(patch) { this.setState(patch, () => { try { localStorage.setItem(this.KEY, JSON.stringify(this.state)); } catch (e) {} }); }
+  text() {
+    const d = new Date().toLocaleDateString();
+    let t = `SUMO GEARS — DESIGN REVIEW NOTES (${d})\n\n`;
+    this.PAGES.forEach(p => { t += `== ${p.n}. ${p.title.toUpperCase()} ==\n${(this.state[p.id] || '—').trim()}\n\n`; });
+    t += `== GENERAL / ACTION ITEMS ==\n${(this.state.general || '—').trim()}\n`;
+    return t;
+  }
+  renderVals() {
+    return {
+      pages: this.PAGES.map(p => {
+        const note = this.state[p.id] || '';
+        const c = note.split('\n').filter(l => l.trim()).length;
+        return { ...p, note, count: c ? `${c} ITEM${c > 1 ? 'S' : ''}` : '', onNote: e => this.save({ [p.id]: e.target.value }) };
+      }),
+      general: this.state.general || '',
+      onGeneral: e => this.save({ general: e.target.value }),
+      copyLabel: this.state._copied ? 'Copied ✓' : 'Copy all notes',
+      copyAll: () => { navigator.clipboard?.writeText(this.text()); this.setState({ _copied: true }); setTimeout(() => this.setState({ _copied: false }), 1600); },
+      downloadAll: () => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([this.text()], { type: 'text/plain' })); a.download = 'SumoGears-review-notes.txt'; a.click(); },
+    };
+  }
+}
+</script>
+</body>
+</html>

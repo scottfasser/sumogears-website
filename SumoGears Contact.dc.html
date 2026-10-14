@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Shippori+Mincho:wght@500;600;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; }
+body { margin: 0; background: #e4e7ea; }
+a { color: #0686db; text-decoration: none; }
+a:hover { color: #eb0028; }
+input:focus, select:focus, textarea:focus { outline: 2px solid #0686db; outline-offset: -2px; }
+</style>
+</helmet>
+
+<div data-screen-label="Contact" style="max-width:1440px; margin:0 auto; background:#fff; font-family:'Zen Kaku Gothic New', sans-serif; color:#1b2126;">
+
+  <div style="min-height:64px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:14px 28px; padding:10px 40px; background:#fff; border-bottom:3px solid #0686db;">
+    <a href="SumoGears Homepage.dc.html" style="display:flex; align-items:center; gap:12px;">
+      <img src="assets/sumo-logo.svg" alt="Sumo Gears" style="width:52px; height:52px; display:block; object-fit:contain;">
+      <div style="line-height:1;"><div style="font-weight:900; font-size:21px; letter-spacing:0.02em; color:#0f2f57;">SUMO <span style="color:#eb0028;">GEARS</span></div><div style="font-family:'Shippori Mincho'; font-weight:600; font-size:9.5px; letter-spacing:0.26em; color:#0a63a8; margin-top:3px;">日本製 · MADE IN JAPAN</div></div>
+    </a>
+    <div style="display:flex; flex-wrap:wrap; align-items:center; gap:26px; font-weight:500; font-size:14px; color:#3c444c;">
+      <a href="SumoGears Product Page v2 - LC 60-70.dc.html" style="color:#3c444c;">Low Range Gear Sets</a><a href="SumoGears Rebuild Kits.dc.html" style="color:#3c444c;">Rebuild Kits</a><span>Community</span><a href="SumoGears Dealer-Event Map v2.html" style="color:#3c444c;">Dealers &amp; Events</a><span>About</span>
+    </div>
+    <div style="display:flex; align-items:center; gap:16px; font-size:13px; color:#5a626a;">
+      <a href="SumoGears FAQ.dc.html" style="color:#5a626a;">FAQs</a><span style="color:#0a63a8; font-weight:700;">Contact</span>
+      <a href="SumoGears Dealer-Event Map v2.html" style="background:#eb0028; color:#fff; font-weight:700; font-size:13.5px; padding:9px 16px; border-radius:2px;">Find a Dealer</a>
+    </div>
+  </div>
+
+  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); background:#eef1f4;">
+    <div style="background:#0f2f57; color:#fff; padding:56px 48px; display:flex; flex-direction:column; gap:18px;">
+      <div style="font-family:'Shippori Mincho'; font-weight:600; font-size:12.5px; letter-spacing:0.2em; color:#5eb4ec;">CONTACT US</div>
+      <h1 style="font-weight:900; font-size:40px; line-height:1.08; margin:0; text-wrap:pretty;">Become a dealer, add an event or ask us something about our gears and rebuild kits.</h1>
+      <div style="width:44px; height:3px; background:#eb0028;"></div>
+      <p style="font-size:15.5px; line-height:1.65; color:#dbe6f1; margin:0; max-width:440px; text-wrap:pretty;">Tell us a little about what you need and the Sumo Gears team will get back to you. For installation help, please contact your local overlanding shop or nearest dealer.</p>
+      <a href="SumoGears Dealer-Event Map v2.html" style="color:#fff; font-weight:700; font-size:14px; margin-top:6px;">Find a dealer near you →</a>
+    </div>
+
+    <div style="padding:48px; display:flex; justify-content:center;">
+      <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+        <div style="width:100%; max-width:560px; background:#fff; border:1px solid #dfe4e9; border-top:4px solid #0686db; padding:40px 36px; display:flex; flex-direction:column; gap:12px;">
+          <div style="font-family:'IBM Plex Mono'; font-size:11px; letter-spacing:0.12em; color:#0a63a8;">MESSAGE SENT</div>
+          <h2 style="font-weight:900; font-size:26px; margin:0;">Thanks, {{ firstName }}.</h2>
+          <p style="font-size:14.5px; line-height:1.6; color:#5a626a; margin:0;">We received your {{ topicLower }} and will reply to {{ email }}.</p>
+          <button onClick="{{ reset }}" style="align-self:flex-start; margin-top:8px; border:1px solid #0f2f57; background:#fff; color:#0f2f57; font:inherit; font-weight:700; font-size:13.5px; padding:11px 20px; border-radius:2px; cursor:pointer;">Send another message</button>
+        </div>
+      </sc-if>
+      <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+        <form onSubmit="{{ submit }}" style="width:100%; max-width:560px; background:#fff; border:1px solid #dfe4e9; border-top:4px solid #eb0028; padding:32px 36px; display:flex; flex-direction:column; gap:18px;">
+          <label style="display:flex; flex-direction:column; gap:7px;">
+            <span style="font-family:'IBM Plex Mono'; font-size:11px; letter-spacing:0.1em; color:#3c444c;">HOW CAN WE HELP? *</span>
+            <select required="required" value="{{ topic }}" onChange="{{ setTopic }}" style="font:inherit; font-size:15px; padding:12px 13px; border:1px solid #c9d0d7; border-radius:2px; background:#fff; color:#1b2126;">
+              <option value="">Select one</option>
+              <option value="Dealer Inquiry">Dealer Inquiry</option>
+              <option value="Event Update/Request">Event Update/Request</option>
+              <option value="Product Question">Product Question</option>
+              <option value="Something Else">Something Else</option>
+            </select>
+          </label>
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:18px;">
+            <label style="display:flex; flex-direction:column; gap:7px;">
+              <span style="font-family:'IBM Plex Mono'; font-size:11px; letter-spacing:0.1em; color:#3c444c;">NAME *</span>
+              <input required="required" name="name" autocomplete="name" style="font:inherit; font-size:15px; padding:12px 13px; border:1px solid #c9d0d7; border-radius:2px;">
+            </label>
+            <label style="display:flex; flex-direction:column; gap:7px;">
+              <span style="font-family:'IBM Plex Mono'; font-size:11px; letter-spacing:0.1em; color:#3c444c;">EMAIL *</span>
+              <input required="required" type="email" name="email" autocomplete="email" style="font:inherit; font-size:15px; padding:12px 13px; border:1px solid #c9d0d7; border-radius:2px;">
+            </label>
+          </div>
+          <label style="display:flex; flex-direction:column; gap:7px;">
+            <span style="font-family:'IBM Plex Mono'; font-size:11px; letter-spacing:0.1em; color:#3c444c;">COUNTRY *</span>
+            <input required="required" name="country" autocomplete="country-name" style="font:inherit; font-size:15px; padding:12px 13px; border:1px solid #c9d0d7; border-radius:2px;">
+          </label>
+          <label style="display:flex; flex-direction:column; gap:7px;">
+            <span style="font-family:'IBM Plex Mono'; font-size:11px; letter-spacing:0.1em; color:#3c444c;">HELPFUL DETAILS</span>
+            <textarea name="details" rows="6" placeholder="{{ detailsHint }}" style="font:inherit; font-size:15px; padding:12px 13px; border:1px solid #c9d0d7; border-radius:2px; resize:vertical;"></textarea>
+          </label>
+          <button type="submit" style="display:flex; align-items:center; justify-content:space-between; border:0; background:#eb0028; color:#fff; font:inherit; font-weight:700; font-size:13.5px; letter-spacing:0.16em; padding:17px 20px; border-radius:2px; cursor:pointer;" style-hover="background:#d10024;"><span>SEND US A MESSAGE</span><span>→</span></button>
+        </form>
+      </sc-if>
+    </div>
+  </div>
+
+  <div style="background:#fff; padding:36px 40px 26px; border-top:3px solid #0686db;">
+    <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:32px; margin-bottom:24px;">
+      <div style="max-width:320px;"><div style="display:flex; align-items:center; gap:12px; margin-bottom:12px;"><img src="assets/sumo-logo.svg" alt="Sumo Gears" style="width:52px; height:52px; display:block; object-fit:contain;"><div style="font-weight:900; font-size:20px; letter-spacing:0.02em; color:#0f2f57;">SUMO <span style="color:#eb0028;">GEARS</span></div></div><div style="font-size:13.5px; color:#8a9097; line-height:1.6;">日本製 · Japan OE-grade drivetrain. An AAIE company.</div></div>
+      <div style="display:flex; flex-wrap:wrap; gap:56px; font-size:13.5px; color:#5a626a;">
+        <div><div style="font-family:'Shippori Mincho'; font-size:11px; color:#0a63a8; letter-spacing:0.14em; margin-bottom:12px;">PRODUCTS</div><div style="display:flex; flex-direction:column; gap:8px;"><a href="SumoGears Product Page v2 - LC 60-70.dc.html" style="color:#5a626a;">Toyota Gear Sets</a><span>Suzuki Gear Sets</span><a href="SumoGears Rebuild Kits.dc.html" style="color:#3c444c;">Rebuild Kits</a></div></div>
+        <div><div style="font-family:'Shippori Mincho'; font-size:11px; color:#0a63a8; letter-spacing:0.14em; margin-bottom:12px;">COMPANY</div><div style="display:flex; flex-direction:column; gap:8px;"><span>About Us</span><span>Community</span><a href="SumoGears Dealer-Event Map v2.html" style="color:#5a626a;">Events</a></div></div>
+        <div><div style="font-family:'Shippori Mincho'; font-size:11px; color:#0a63a8; letter-spacing:0.14em; margin-bottom:12px;">SUPPORT</div><div style="display:flex; flex-direction:column; gap:8px;"><a href="SumoGears Dealer-Event Map v2.html" style="color:#5a626a;">Find a Dealer</a><a href="SumoGears FAQ.dc.html" style="color:#5a626a;">FAQs</a><span style="color:#0a63a8; font-weight:700;">Contact Us</span></div></div>
+      </div>
+    </div>
+    <div style="border-top:1px solid #e1e3e5; padding-top:16px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px; font-size:11.5px; color:#9aa0a6;"><span>© 2026 Sumo Gears · All Automotive Import Export</span><span style="font-family:'Shippori Mincho'; letter-spacing:0.1em; color:#0a63a8;">Japanese Made. Trail Proven.</span></div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { topic: '', sent: false, name: '', email: '' };
+  componentDidMount() {
+    const m = { dealer: 'Dealer Inquiry', event: 'Event Update/Request', product: 'Product Question', other: 'Something Else' };
+    const t = new URLSearchParams(location.search).get('topic') || location.hash.slice(1);
+    if (m[t]) this.setState({ topic: m[t] });
+  }
+  renderVals() {
+    const s = this.state;
+    const hints = {
+      'Dealer Inquiry': 'Shop name, location, website, and the platforms you work on.',
+      'Event Update/Request': 'Event name, dates, location, and a link if you have one.',
+      'Product Question': 'Vehicle, year, and what you want to know.',
+    };
+    return {
+      topic: s.topic, sent: s.sent, notSent: !s.sent, email: s.email,
+      firstName: (s.name || '').split(' ')[0] || 'there',
+      topicLower: s.topic === 'Something Else' || !s.topic ? 'message' : s.topic.toLowerCase(),
+      detailsHint: hints[s.topic] || 'Anything that helps us point you in the right direction.',
+      setTopic: e => this.setState({ topic: e.target.value }),
+      submit: e => { e.preventDefault(); const f = e.target; this.setState({ sent: true, name: f.name.value, email: f.email.value }); },
+      reset: () => this.setState({ sent: false, topic: '' }),
+    };
+  }
+}
+</script>
+</body>
+</html>
